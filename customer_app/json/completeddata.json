@@ -1,0 +1,14 @@
+[
+    {
+    "title": "Micro Light Aircraft (A1)",
+     "slots": "2",
+      "price": "3000",
+       "group": "Agni Aero"
+  },
+  {
+    "title": "Micro Light Aircraft (M1)",
+    "slots": "4",
+     "price": "2000",
+      "group": "Agni Aero"
+  }
+]

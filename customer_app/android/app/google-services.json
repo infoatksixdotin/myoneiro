@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "83846552079",
+    "firebase_url": "https://test22-3f.firebaseio.com",
+    "project_id": "test22-3f",
+    "storage_bucket": "test22-3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83846552079:android:d149368f3c33b86d2a217a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3SG34EVyhR8q48RlZIhEWD3pB7JJqMtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83846552079:android:843fbbe003ce36532a217a",
+        "android_client_info": {
+          "package_name": "com.example.joy_ride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3SG34EVyhR8q48RlZIhEWD3pB7JJqMtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83846552079:android:620e9962a0ffc7c32a217a",
+        "android_client_info": {
+          "package_name": "com.uttampanchasara.flutterlogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3SG34EVyhR8q48RlZIhEWD3pB7JJqMtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83846552079:android:20da47f8ff10f3842a217a",
+        "android_client_info": {
+          "package_name": "in.ksix.firestore_voting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3SG34EVyhR8q48RlZIhEWD3pB7JJqMtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83846552079-ltmbmqhobd39m1lnptq0d1kfp7rv5sod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
