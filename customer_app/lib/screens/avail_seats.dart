@@ -1,20 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/model/timeslot.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
-
 
 class availSeats extends StatefulWidget {
   @override
-  _availSeatsState createState() => new _availSeatsState();
+  State<StatefulWidget> createState() {
+    return _availSeats();
+  }
 }
 
-class _availSeatsState extends State<availSeats>{
+class _availSeats extends State<availSeats> {
+  bool _isTimeLoading =  true;
+  Size _deviceSize;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+    _deviceSize = MediaQuery.of(context).size;
+    _isTimeLoading = false;
+
     return Scaffold(
-      backgroundColor: AppTheme.whiteColor,
-       appBar: new AppBar(
-        title: new Text('Select slots'),
+      backgroundColor: AppTheme.lightBlueAccent,
+      appBar: new AppBar(
+        title: new Text(
+          "Select Aircraft Slot", style: TextStyle(color: AppTheme.whiteColor,),),
         backgroundColor: AppTheme.lightBlueAccent,
+        iconTheme: new IconThemeData(color: AppTheme.whiteColor),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -23,16 +43,51 @@ class _availSeatsState extends State<availSeats>{
         ),
       ),
       body: Container(
+        color: Colors.white,
         child: Center(
-          child: Column(
-            // center the children
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              //Text("My Slot", style: TextStyle(color: AppTheme.lightBlueAccent, fontSize: 50),)
-            ],
-          ),
+          child: CustomScrollView(slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                    color: Colors.grey.withOpacity(0.1))
+              ]),
+            ),
+            _isTimeLoading
+                ? SliverList(
+                delegate: SliverChildListDelegate([
+                  Container(
+                    height: _deviceSize.height * 0.5,
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(
+                      backgroundColor: AppTheme.lightBlueAccent,
+                    ),
+                  )
+                ]))
+                : time.length > 0
+                ? SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3),
+              delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    return TimeBox(
+                        index, context, _deviceSize, time);
+                  }, childCount: time.length + 1),
+            )
+        : SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  width: _deviceSize.width,
+                  color: Colors.white,
+                  child: Center(
+                    child: Text('No items present'),
+                  ),
+                ),
+              ]),
+            ),
+          ]),
         ),
       ),
     );
+
   }
 }

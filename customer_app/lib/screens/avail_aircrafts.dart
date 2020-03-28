@@ -55,7 +55,6 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                       onTap: ()
                       {
                        Navigator.pushNamed(context,'/availSeats');
-                       //Navigator.pushNamed(context,'/PaymentOptions'); //for testing
                       },
                       child: new Column(
                         mainAxisAlignment: MainAxisAlignment.center,
