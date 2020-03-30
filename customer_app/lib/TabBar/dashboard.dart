@@ -86,8 +86,8 @@ _pickDate() async {
 
     return new Scaffold(
         resizeToAvoidBottomInset: false,
-        drawer:DrawerMenu.getMenu(context),
       appBar: new AppBar(
+           //to remove back button
           title: new Text('Dashboard'),
           backgroundColor: AppTheme.lightBlueAccent,
           centerTitle: true,
@@ -97,7 +97,7 @@ _pickDate() async {
             ),
           ),
         ),
-
+        drawer: DrawerMenu(),
         body: Center(
           child: Container(
             child: new Column(

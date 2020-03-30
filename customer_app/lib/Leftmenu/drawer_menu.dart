@@ -1,76 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app1/model/leftmenudata.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 
-class DrawerMenu {
-  static Drawer getMenu(BuildContext context) {
-    String bookingsTitle = LeftMenuData.getMenuTitle_Bookings();
-    String walletTitle = LeftMenuData.getMenuTitle_Wallet();
-    String profileTitle = LeftMenuData.getMenuTitle_Profile();
-    String logoutTitle = LeftMenuData.getMenuTitle_Logout();
+class DrawerMenu extends StatefulWidget {
+  @override
+  _DrawerMenuState createState() => _DrawerMenuState();
+}
 
-    return Drawer(
+class _DrawerMenuState extends State<DrawerMenu> {
+  @override
+  Widget build(BuildContext context) {
+        return Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-
+              /*
               DrawerHeader(
                 //child: Text('Farmer Application'),
                 decoration: BoxDecoration(
                   color: AppTheme.lightBlueAccent,
                 ),
               ),
+              */
+              SizedBox(height: 50,), 
+              ListTile(
+                title: Text('My Bookings', style: TextStyle(color: AppTheme.lightBlueAccent,),),
+                onTap: () {
+                  Navigator.pushNamed(context,'/leftmenubookings');
 
-            SizedBox(height: 50,),
-          ListTile(
-            title: Text(bookingsTitle, style: TextStyle(color: AppTheme.lightBlueAccent,),),
-            onTap: () {
-              Navigator.pushNamed(context,'/leftmenubookings');
+                },
+                leading: Icon(
+                  Icons.list,
+                  size: 25,
+                  color: AppTheme.lightBlueAccent,
+                ),
+              ),
+              ListTile(
+                title: Text('My Wallet', style: TextStyle(color: AppTheme.lightBlueAccent,),),
+                onTap: () {
+                  Navigator.pushNamed(context,'/wallet');
 
-            },
-            leading: Icon(
-              Icons.list,
-              size: 25,
-              color: AppTheme.lightBlueAccent,
-            ),
-          ),
-          ListTile(
-            title: Text(walletTitle, style: TextStyle(color: AppTheme.lightBlueAccent,),),
-            onTap: () {
-              Navigator.pushNamed(context,'/wallet');
-
-            },
-            leading: Icon(
-              Icons.account_balance_wallet,
-              size: 25,
-              color: AppTheme.lightBlueAccent,
-            ),
-          ),
-          ListTile(
-            title: Text(profileTitle, style: TextStyle(color: AppTheme.lightBlueAccent,),),
-            onTap: () {
-              Navigator.pushNamed(context,'/Myprofile');
-            },
-            leading: Icon(
-              Icons.person_pin,
-              size: 25,
-              color: AppTheme.lightBlueAccent,
-            ),
-          ),
-          ListTile(
-            title: Text(logoutTitle, style: TextStyle(color: AppTheme.lightBlueAccent,),),
-            onTap: () {
-              //Navigator.pushNamed(context,'/LogoutScreen');
-
-            },
-            leading: Icon(
-              Icons.call_missed_outgoing,
-              size: 25,
-              color: AppTheme.lightBlueAccent,
-            ),
-          ),
+                },
+                leading: Icon(
+                  Icons.account_balance_wallet,
+                  size: 25,
+                  color: AppTheme.lightBlueAccent,
+                ),
+              ),
+              ListTile(
+                title: Text('My profile', style: TextStyle(color: AppTheme.lightBlueAccent,),),
+                onTap: () {
+                  Navigator.pushNamed(context,'/Myprofile');
+                },
+                leading: Icon(
+                  Icons.person_pin,
+                  size: 25,
+                  color: AppTheme.lightBlueAccent,
+                ),
+              ),
+              ListTile(
+                title: Text('Logout', style: TextStyle(color: AppTheme.lightBlueAccent,),),
+                onTap: () {
+                  //Navigator.pushNamed(context,'/LogoutScreen');
+  
+                },
+                leading: Icon(
+                  Icons.call_missed_outgoing,
+                  size: 25,
+                  color: AppTheme.lightBlueAccent,
+                ),
+              ),
             ],
           ),
         );
   }
 }
+ 
