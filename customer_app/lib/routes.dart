@@ -11,6 +11,7 @@ import 'package:flutter_app1/screens/calender.dart';
 import 'package:flutter_app1/screens/login_user.dart';
 import 'package:flutter_app1/screens/payment_options.dart';
 import 'package:flutter_app1/screens/register_user.dart';
+import 'package:flutter_app1/screens/firebase_api_console.dart';
 
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
@@ -26,7 +27,5 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/LogoutScreen': (BuildContext context) => LogoutScreen(),
   '/availSeats': (BuildContext context) => availSeats(),
   '/PaymentOptions': (BuildContext context) => PaymentOptions(),
-
-  
-
+  '/FirebaseApiConsolePage': (BuildContext context) => FirebaseApiConsolePage(),  
 };

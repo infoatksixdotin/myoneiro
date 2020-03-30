@@ -78,7 +78,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 // ...
                 // Then close the drawer
                 Navigator.pop(context);
-                Navigator.pushNamed(context,'/RestApiConsolePage');
+                Navigator.pushNamed(context,'/FirebaseApiConsolePage');
               },
             ),
             ],
