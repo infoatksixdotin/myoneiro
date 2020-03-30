@@ -98,23 +98,19 @@ _pickDate() async {
           ),
         ),
 
-        body: Center(
+        body: SingleChildScrollView(
+      child:Center(
           child: Container(
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 20,),
+//                SizedBox(height: 20,),
                  CircleAvatar(
                   radius: 60.0,
                   backgroundColor: Colors.black,
                   backgroundImage: AssetImage('assets/logo/images.jpg'),
-                  
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-
-                 Card(
+                Card(
                     color: Colors.white,
                     margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                     child: ListTile(
@@ -147,15 +143,12 @@ _pickDate() async {
                       ),
                       title: getTimeslotDropdown(),
                     )),
-                    SizedBox(
-                  height: 30,
-                ),
                   new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Container(
-                      height:50.0,
-                      width: 210.0,
+                     // height:50.0,
+                     // width: 210.0,
                       margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 40.0),
                       child: new RaisedButton(
                         child: new Text(
@@ -176,6 +169,7 @@ _pickDate() async {
               ],
             ),
           ),
+        )
         ));
   }
 }

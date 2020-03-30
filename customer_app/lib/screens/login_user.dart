@@ -127,12 +127,12 @@ class _LoginAuthState extends State<LoginAuth> {
               children: <Widget>[
                 SizedBox(height: 60,),
                 CircleAvatar(
-                  radius: 100.0,
+                  radius: 80.0,
                   backgroundColor: Colors.black,
                   backgroundImage: AssetImage('assets/logo/images.jpg'),
                   //test-image.png
                 ),
-                SizedBox(height: 50,),
+                SizedBox(height: 30,),
                 Padding(
                   padding: EdgeInsets.all(30.0),
                   child: Column(
@@ -176,7 +176,7 @@ class _LoginAuthState extends State<LoginAuth> {
                           color: AppTheme.lightBlueAccent,
                         ),
                          ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 10,),
                       new FlatButton(
                         child: Text('Register Here'),
                         textColor: AppTheme.lightBlueAccent,
@@ -184,7 +184,7 @@ class _LoginAuthState extends State<LoginAuth> {
                           Navigator.pushNamed(context,'/register');
                         },
                       ),
-                      SizedBox(height: 45,),
+                      SizedBox(height: 25,),
                       new FlatButton(
                         child: Text('skip',textAlign: TextAlign.end,),
                         textColor: AppTheme.lightBlueAccent,

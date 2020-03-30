@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app1/screens/payment_options.dart';
+import 'package:flutter_app1/screens/passenger_details.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 
 class Time {
@@ -32,11 +32,11 @@ class TimeCard extends StatelessWidget {
                       onPressed: (){
                         //  setState(() {
                         //  });
-                        Navigator.pushNamed(context,'/PaymentOptions');
+                        Navigator.pushNamed(context,'/PassengerDetails');
                       },
                      child: Icon(
                        Icons.done,color: AppTheme.lightBlueAccent, // add condition
-                        size: 45
+                        size: 35
                         ),
                       backgroundColor: Colors.white,
                       elevation: 0.0,
@@ -65,7 +65,7 @@ Widget TimeBox(int index, BuildContext context, Size _deviceSize,
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PaymentOptions(),
+            builder: (context) => PassengerDetails(),
             settings: RouteSettings(
               arguments: time[index],
             ),
@@ -73,7 +73,7 @@ Widget TimeBox(int index, BuildContext context, Size _deviceSize,
         );
       },
       child: Container(
-          margin: EdgeInsets.all(25.0),
+          margin: EdgeInsets.all(20.0),
           width: _deviceSize.width * 0.4,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

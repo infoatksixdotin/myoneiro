@@ -9,6 +9,7 @@ import 'package:flutter_app1/screens/avail_aircrafts.dart';
 import 'package:flutter_app1/screens/avail_seats.dart';
 import 'package:flutter_app1/screens/calender.dart';
 import 'package:flutter_app1/screens/login_user.dart';
+import 'package:flutter_app1/screens/passenger_details.dart';
 import 'package:flutter_app1/screens/payment_options.dart';
 import 'package:flutter_app1/screens/register_user.dart';
 
@@ -26,6 +27,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/LogoutScreen': (BuildContext context) => LogoutScreen(),
   '/availSeats': (BuildContext context) => availSeats(),
   '/PaymentOptions': (BuildContext context) => PaymentOptions(),
+  '/PassengerDetails': (BuildContext context) => PassengerDetails(),
 
   
 

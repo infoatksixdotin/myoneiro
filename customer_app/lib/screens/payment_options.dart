@@ -56,13 +56,13 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                   },
                 ),
               ),
-              SizedBox(height: 150),
+              SizedBox(height: 50),
               new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Container(
-                      height: 50.0,
-                      width: 210.0,
+                      //height: 50.0,
+                      //width: 210.0,
                       child: new RaisedButton(
                         color: AppTheme.lightBlueAccent,
                         child: new Text(
@@ -73,7 +73,6 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                         ),
 
                 onPressed: () {
-
                          }
                         
                       ),
