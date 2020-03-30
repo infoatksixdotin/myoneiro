@@ -69,6 +69,18 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   color: AppTheme.lightBlueAccent,
                 ),
               ),
+			  // This is added for debug purpose
+              ListTile(
+              title: Text("Debug - FireBase", style: TextStyle(color:AppTheme.lightBlueAccent)),
+              leading: Icon(Icons.contacts, color: AppTheme.lightBlueAccent),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+                Navigator.pushNamed(context,'/RestApiConsolePage');
+              },
+            ),
             ],
           ),
         );
