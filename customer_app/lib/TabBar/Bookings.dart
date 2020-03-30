@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/Leftmenu/drawer_menu.dart';
 import 'package:flutter_app1/screens/bookedscreen.dart';
 import 'package:flutter_app1/screens/cancelledscreen.dart';
 import 'package:flutter_app1/screens/completedscreen.dart';
@@ -24,7 +25,6 @@ class _BookingsState extends State<Bookings> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        automaticallyImplyLeading: false, //to remove back button
        title: new Text('Bookings'),
         backgroundColor: AppTheme.lightBlueAccent,
         centerTitle: true,
@@ -46,7 +46,7 @@ class _BookingsState extends State<Bookings> with SingleTickerProviderStateMixin
           indicatorSize: TabBarIndicatorSize.tab,),
         bottomOpacity: 1,
       ),
-
+      drawer:DrawerMenu.getMenu(context),
       body: TabBarView(
       
         children: [

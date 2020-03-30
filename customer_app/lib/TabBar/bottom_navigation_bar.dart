@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/Leftmenu/drawer_menu.dart';
 import 'package:flutter_app1/TabBar/Bookings.dart';
 import 'package:flutter_app1/TabBar/Profile.dart';
 import 'package:flutter_app1/TabBar/Support.dart';
@@ -35,6 +36,7 @@ class BottomNavBarState extends State<BottomNavBar> with SingleTickerProviderSta
   Widget build(BuildContext context) {
     return Scaffold(
       // Set the TabBar view as the body of the Scaffold
+      drawer: DrawerMenu.getMenu(context),
       body: TabBarView(
         // Add tabs as widgets
         children: <Widget>[DashboardPage(), Bookings(), Support(),Profile()],

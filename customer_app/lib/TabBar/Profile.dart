@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/Leftmenu/drawer_menu.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -42,6 +43,7 @@ initState() {
         ),
       ),
       backgroundColor: AppTheme.ScaffoldBackgroundColor,
+      drawer:DrawerMenu.getMenu(context),
       body: SingleChildScrollView(
     child:  Container(
           padding: new EdgeInsets.all(20.0),
