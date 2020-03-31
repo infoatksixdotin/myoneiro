@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/model/userdata.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -145,7 +146,28 @@ initState() {
                 taskPhoneInputController.text.isNotEmpty &&
 				        taskEmailInputController.text.isNotEmpty &&
 				        taskAgeInputController.text.isNotEmpty) {
-          Firestore.instance
+                 registerUser();
+          }
+        },
+                        color: AppTheme.lightBlueAccent,
+                      ),
+                    ),
+                  ],
+                ),
+        ],
+          ),  
+         
+      ),
+      ),
+    );
+  }
+  bool registerUser() 
+  {
+      bool rt = UserData.create(taskNameInputController.text, int.parse(taskPhoneInputController.text),taskEmailInputController.text, int.parse(taskAgeInputController.text));
+  }
+}
+/*
+              Firestore.instance
             .collection('users')
                 .add({
                   "name": taskNameInputController.text,
@@ -161,22 +183,4 @@ initState() {
 				        taskAgeInputController.clear()
               })
               .catchError((err) => print(err));
-          }
-        },
-                        color: AppTheme.lightBlueAccent,
-                      ),
-                    ),
-                  ],
-                ),
-        ],
-          ),  
-         
-      ),
-      ),
-    );
-    
-  }
- 
-}
-
-
+    */

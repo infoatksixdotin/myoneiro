@@ -50,7 +50,7 @@ class _FirebaseApiConsolePage extends State<FirebaseApiConsolePage> {
                   cursorColor: AppTheme.lightBlueAccent,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  decoration: InputDecoration(hintText: '', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
+                  decoration: InputDecoration(hintText: 'collection name', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
                   ),
                     focusedBorder: UnderlineInputBorder(
@@ -68,7 +68,7 @@ class _FirebaseApiConsolePage extends State<FirebaseApiConsolePage> {
                   cursorColor: AppTheme.lightBlueAccent,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  decoration: InputDecoration(hintText: '', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
+                  decoration: InputDecoration(hintText: 'row value', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
                   ),
                     focusedBorder: UnderlineInputBorder(
@@ -122,11 +122,17 @@ class _FirebaseApiConsolePage extends State<FirebaseApiConsolePage> {
   }
  
   void callFirebaseApi(String collectionName, String rowValue) {
-    String response = "Response Value";
-    m_txtResponse.text = "This is firebase response: " + collectionName +", " + rowValue;
+    (m_rw == true) ? read(collectionName, rowValue) : write(collectionName, rowValue) ;
+  }
+
+  void read(String collectionName, String rowValue) {
+ 
+  }
+
+  void write(String collectionName, String rowValue) {
+    DocumentReference ref =  Firestore.instance.collection(collectionName).document('TESTID1');
   }
 }
-
 /*Firestore.instance
                 .collection('users')
                 .add({
