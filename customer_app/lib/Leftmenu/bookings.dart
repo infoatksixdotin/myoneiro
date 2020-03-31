@@ -49,8 +49,8 @@ class _leftmenubookingsState extends State<leftmenubookings> with SingleTickerPr
       
         children: [
           bookedscreen(),
-          cancelledscreen(),
           completedscreen(),
+          cancelledscreen(),
         ],
         
         controller: _tabController,

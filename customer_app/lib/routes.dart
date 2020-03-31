@@ -7,7 +7,6 @@ import 'package:flutter_app1/TabBar/dashboard.dart';
 import 'package:flutter_app1/Leftmenu/my_profile.dart';
 import 'package:flutter_app1/screens/avail_aircrafts.dart';
 import 'package:flutter_app1/screens/avail_seats.dart';
-import 'package:flutter_app1/screens/calender.dart';
 import 'package:flutter_app1/screens/login_user.dart';
 import 'package:flutter_app1/screens/passenger_details.dart';
 import 'package:flutter_app1/screens/payment_options.dart';
@@ -20,7 +19,6 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/DashboardPage': (BuildContext context) => DashboardPage(),
   '/Myprofile': (BuildContext context) => Myprofile(),
   '/BottomNavBar': (BuildContext context) => BottomNavBar(),
-  '/DateTimeField': (BuildContext context) => DateTimeField(),
   '/AvailAircrafts': (BuildContext context) => AvailAircrafts(),
   '/wallet': (BuildContext context) => wallet(),
   '/leftmenubookings': (BuildContext context) => leftmenubookings(),
@@ -29,6 +27,5 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/PaymentOptions': (BuildContext context) => PaymentOptions(),
   '/PassengerDetails': (BuildContext context) => PassengerDetails(),
 
-  
 
 };

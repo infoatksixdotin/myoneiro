@@ -13,15 +13,17 @@ class DrawerMenu {
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-
               DrawerHeader(
-                //child: Text('Farmer Application'),
+                //child: Text('MyOneiro'),
                 decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/logo/images.jpg'),
+                      fit: BoxFit.cover
+                  ),
                   color: AppTheme.lightBlueAccent,
                 ),
               ),
-
-            SizedBox(height: 50,),
+              SizedBox(height: 10,),
           ListTile(
             title: Text(bookingsTitle, style: TextStyle(color: AppTheme.lightBlueAccent,),),
             onTap: () {

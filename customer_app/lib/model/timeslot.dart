@@ -11,7 +11,11 @@ const List<Time> time = const <Time>[
   const Time(hour: '6:15AM'),
   const Time(hour: '6:30AM'),
   const Time(hour: '6:45AM'),
-  const Time(hour: '7:00AM')
+  const Time(hour: '7:00AM'),
+  const Time(hour: '7:15AM'),
+  const Time(hour: '7:30AM'),
+  const Time(hour: '7:45AM'),
+  const Time(hour: '8:00AM'),
 ];
 
 class TimeCard extends StatelessWidget {
@@ -28,22 +32,11 @@ class TimeCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                     new FloatingActionButton(
-                      onPressed: (){
-                        //  setState(() {
-                        //  });
-                        Navigator.pushNamed(context,'/PassengerDetails');
-                      },
-                     child: Icon(
-                       Icons.done,color: AppTheme.lightBlueAccent, // add condition
-                        size: 35
-                        ),
-                      backgroundColor: Colors.white,
-                      elevation: 0.0,
-                      heroTag: null,
-                    ),
-                     Text(time.hour, style: TextStyle(color: AppTheme.lightBlueAccent,fontWeight: FontWeight.bold)),
-                   
+//                  new IconButton(
+//                    icon: new Icon(Icons.done),
+//                    highlightColor: Colors.lightBlueAccent,
+//                  ),
+                     Text(time.hour, style: TextStyle(color: AppTheme.BlackColor,fontWeight: FontWeight.bold)),
                 ]
             ),
             )
@@ -56,12 +49,11 @@ Widget TimeBox(int index, BuildContext context, Size _deviceSize,
   if (index > time.length - 1) {
     return GestureDetector(
       onTap: () {
-        
       },
     );
   }
   return new GestureDetector(
-      onTap: () {
+   onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -71,9 +63,9 @@ Widget TimeBox(int index, BuildContext context, Size _deviceSize,
             ),
           ),
         );
-      },
+    },
       child: Container(
-          margin: EdgeInsets.all(20.0),
+          margin: EdgeInsets.all(28.0),
           width: _deviceSize.width * 0.4,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -82,7 +74,8 @@ Widget TimeBox(int index, BuildContext context, Size _deviceSize,
           child: Stack(children: [
             Container(
                 alignment: Alignment.bottomRight,
-                child: TimeCard(time: time[index])),
+                child: TimeCard(time: time[index]),
+            ),
           ]
           )
       )

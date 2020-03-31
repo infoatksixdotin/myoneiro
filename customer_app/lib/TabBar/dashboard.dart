@@ -47,7 +47,7 @@ _pickDate() async {
           dropdownLValue = newValue;
         });
       },
-      items: <String>['Bangalore-Jakkur', 'Bangalore-2', 'Bangalore-3']
+      items: <String>['Bangalore-Jakkur']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -72,7 +72,7 @@ _pickDate() async {
           dropdownTValue = newValue;
         });
       },
-      items: <String>['6AM-8AM', '10AM-12PM', '3PM-5PM']
+      items: <String>['6AM-8AM', '3PM-5PM']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -88,7 +88,7 @@ _pickDate() async {
         resizeToAvoidBottomInset: false,
         drawer:DrawerMenu.getMenu(context),
       appBar: new AppBar(
-          title: new Text('Dashboard'),
+          title: new Text('Book Tickets'),
           backgroundColor: AppTheme.lightBlueAccent,
           centerTitle: true,
           shape: RoundedRectangleBorder(
@@ -104,9 +104,9 @@ _pickDate() async {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-//                SizedBox(height: 20,),
+               SizedBox(height: 20,),
                  CircleAvatar(
-                  radius: 60.0,
+                  radius: 80.0,
                   backgroundColor: Colors.black,
                   backgroundImage: AssetImage('assets/logo/images.jpg'),
                 ),
@@ -129,7 +129,7 @@ _pickDate() async {
                          title: Text("${pickedDate.day}, ${pickedDate.month}, ${pickedDate.year}",style: TextStyle(color: AppTheme.lightBlueAccent),),
                           leading: Icon(
                             Icons.calendar_today,
-                            color: AppTheme.lightBlueAccent,                        
+                            color: AppTheme.lightBlueAccent,
                           ),
                       )),
                     ),

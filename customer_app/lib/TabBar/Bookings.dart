@@ -51,8 +51,8 @@ class _BookingsState extends State<Bookings> with SingleTickerProviderStateMixin
       
         children: [
           bookedscreen(),
-          cancelledscreen(),
           completedscreen(),
+          cancelledscreen(),
         ],
         
         controller: _tabController,

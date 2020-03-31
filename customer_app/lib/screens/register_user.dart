@@ -31,9 +31,9 @@ initState() {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          "Register", style: TextStyle(color: AppTheme.whiteColor,),),
-        backgroundColor: AppTheme.lightBlueAccent,
-        iconTheme: new IconThemeData(color: AppTheme.whiteColor),
+          "Register", style: TextStyle(color: AppTheme.lightBlueAccent,),),
+        backgroundColor: AppTheme.whiteColor,
+        iconTheme: new IconThemeData(color: AppTheme.lightBlueAccent),
         centerTitle: true,
         actions: <Widget>[
           new IconButton(
@@ -54,7 +54,7 @@ initState() {
                     child: new Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[ CircleAvatar(
-                  radius: 100.0,
+                  radius: 80.0,
                   backgroundColor: Colors.black,
                   backgroundImage: AssetImage('assets/logo/images.jpg'),
                   //test-image.png

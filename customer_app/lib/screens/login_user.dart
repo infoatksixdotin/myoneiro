@@ -125,29 +125,29 @@ class _LoginAuthState extends State<LoginAuth> {
           child: Container(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 60,),
+                SizedBox(height: 20,),
                 CircleAvatar(
                   radius: 80.0,
                   backgroundColor: Colors.black,
                   backgroundImage: AssetImage('assets/logo/images.jpg'),
                   //test-image.png
                 ),
-                SizedBox(height: 30,),
+                SizedBox(height: 10,),
                 Padding(
-                  padding: EdgeInsets.all(30.0),
+                  padding: EdgeInsets.all(50.0),
                   child: Column(
                     children: <Widget>[
                        Container(
                         child: Column(
                           children: <Widget>[
-          new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                            new Container(
+                             padding: const EdgeInsets.only(top: 10.0),
                     //child: Expanded(
-                        child: new TextFormField(
-						onChanged: (value) {
+                           child: new TextFormField(
+						               onChanged: (value) {
                               this.phoneNo = value;
                             },
-                        keyboardType: TextInputType.phone,
+                            keyboardType: TextInputType.phone,
                         decoration: new InputDecoration(
                           hintText: ' Phone Number',
                           labelText: 'Phone Number',
@@ -164,10 +164,10 @@ class _LoginAuthState extends State<LoginAuth> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 40,),
+                      SizedBox(height: 20,),
                        Container(
                         child: RaisedButton(
-                            child: Text('Login with OTP'),
+                            child: Text('Login'),
                             onPressed: (){
                               postTest(this.phoneNo);
                             },
@@ -178,13 +178,13 @@ class _LoginAuthState extends State<LoginAuth> {
                          ),
                       SizedBox(height: 10,),
                       new FlatButton(
-                        child: Text('Register Here'),
+                        child: Text('Register'),
                         textColor: AppTheme.lightBlueAccent,
                         onPressed: (){
                           Navigator.pushNamed(context,'/register');
                         },
                       ),
-                      SizedBox(height: 25,),
+                      SizedBox(height: 10,),
                       new FlatButton(
                         child: Text('skip',textAlign: TextAlign.end,),
                         textColor: AppTheme.lightBlueAccent,

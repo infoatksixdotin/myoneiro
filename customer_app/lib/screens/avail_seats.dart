@@ -34,7 +34,6 @@ class _availSeats extends State<availSeats> {
         title: new Text(
           "Select Aircraft Slot", style: TextStyle(color: AppTheme.whiteColor,),),
         backgroundColor: AppTheme.lightBlueAccent,
-        iconTheme: new IconThemeData(color: AppTheme.whiteColor),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(

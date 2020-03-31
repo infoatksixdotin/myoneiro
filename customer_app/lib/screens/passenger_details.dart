@@ -27,7 +27,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 20,),
-                Align(alignment: Alignment.centerLeft,
+                Align(alignment: Alignment.center,
                   child: Container(
                     child: Text("Passenger Details",style: TextStyle(fontWeight: FontWeight.bold),),
                   ),
@@ -67,7 +67,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                     addRadioButton(1, 'Female'),
                   ],
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 120),
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

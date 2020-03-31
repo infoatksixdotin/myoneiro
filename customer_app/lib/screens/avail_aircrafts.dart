@@ -25,7 +25,8 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
         ),
       ),
       body: Container(
-        height: 5000,
+        width: 500,
+       // height: 500,    
         padding: EdgeInsets.all(0.0),
         child: new Center(
           child: new FutureBuilder(
@@ -38,40 +39,45 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
               return new ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return new Card(
-                    color: AppTheme.whiteColor,
-                    elevation: 5,
-                    //borderOnForeground: true,
                     shape: RoundedRectangleBorder(
-                           borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(15),
-                           bottom: Radius.circular(15),
-                     ),
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
-                    
-                    margin: EdgeInsets.symmetric(
-                            vertical: deviceSize.height * 0.02,
-                            horizontal: deviceSize.width * 0.05),
-                    child: new GestureDetector(
-                      onTap: ()
-                      {
-                       Navigator.pushNamed(context,'/availSeats');
-                      },
-                      child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          new Text("title:" + mydata[index]['title'],
-                          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-                          new Text("slots:" + mydata[index]['slots'],
-                          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-                          new Text("price:" + mydata[index]['price'],
-                          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-                          new Text("group:" + mydata[index]['group'],
-                          style: TextStyle(fontSize: 15),),
-
-                        ],
-                      ),
+                    color: Colors.white,
+                    elevation: 10,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        new  ListTile(
+                          leading: Icon(Icons.local_airport, size: 70,color: Colors.black,),
+                          title: new Text(mydata[index]['title']+'Rs:'+ mydata[index]['price'],
+                              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+                          subtitle: new Text("slots available: "+mydata[index]['slots'],
+                              style: TextStyle(color: Colors.black)),
+                              dense: true,
+                              onTap: (){
+                                 Navigator.pushNamed(context,'/availSeats');
+                              },
+                                    ),
+                        ButtonBar(
+                          children: <Widget>[
+                              FlatButton(
+                              child: new Text(mydata[index]['group'],
+                                  style: TextStyle(color: Colors.lightBlueAccent)),
+                              onPressed: () {
+                                //Navigator.pushNamed(context,'/aircraft_slot');
+                              },
+                            ),
+                            FlatButton(
+                              child: Text('Book',
+                                  style: TextStyle(color: Colors.lightBlueAccent)),
+                              onPressed: () {
+                                Navigator.pushNamed(context,'/availSeats');
+                                },
+                          ),
+                          ],
+                          ),
+                          ],
                     ),
-
                   );
                 },
                 itemCount: mydata == null ? 0 : mydata.length,

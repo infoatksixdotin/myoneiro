@@ -19,7 +19,6 @@ class AppTheme {
   static Brightness BrightnessDark = Brightness.dark;
   static String FontFamily = 'Georgia';
 
-
   static ThemeData getThemeData() {
     return new ThemeData(
       primaryColor: PrimaryColor,
