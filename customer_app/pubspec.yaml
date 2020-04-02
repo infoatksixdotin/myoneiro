@@ -56,6 +56,7 @@ flutter:
     - json/completeddata.json
     - json/cancelleddata.json
     - assets/logo/
+    - assets/aircrafts/
 
 
 

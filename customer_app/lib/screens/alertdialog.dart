@@ -10,10 +10,10 @@ showAlert(BuildContext context, String caption, String value) {
         shape: RoundedRectangleBorder(borderRadius: 
         BorderRadius.all(Radius.circular(15),),),
           title: new Text(caption,textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
-          content: new Text(value,textAlign: TextAlign.center, style: TextStyle(color: Colors.redAccent)),
+          content: new Text(value,textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
           actions: <Widget>[
             new FlatButton(
-              child: new Text('OK',style: TextStyle(color: AppTheme.lightBlueAccent)),
+              child: new Text('OK',style: TextStyle(color: AppTheme.whiteColor)),
               onPressed: () {
                 Navigator.of(context).pop();
               },

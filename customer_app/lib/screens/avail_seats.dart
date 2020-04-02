@@ -32,7 +32,7 @@ class _availSeats extends State<availSeats> {
       backgroundColor: AppTheme.lightBlueAccent,
       appBar: new AppBar(
         title: new Text(
-          "Select Aircraft Slot", style: TextStyle(color: AppTheme.whiteColor,),),
+          "Select Aircraft Slot...", style: TextStyle(color: AppTheme.whiteColor,),),
         backgroundColor: AppTheme.lightBlueAccent,
         centerTitle: true,
         shape: RoundedRectangleBorder(
@@ -45,6 +45,17 @@ class _availSeats extends State<availSeats> {
         color: Colors.white,
         child: Center(
           child: CustomScrollView(slivers: [
+            SliverToBoxAdapter(
+              child: new CircleAvatar(
+                  radius: 75,
+                  child: ClipOval(
+                      child: Image.asset(
+                        'assets/aircrafts/mehta.jpg',
+                      ),
+                  ),
+              ),
+            ),
+ 
             SliverList(
               delegate: SliverChildListDelegate([
                 Container(

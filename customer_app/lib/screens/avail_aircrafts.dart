@@ -15,7 +15,7 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
     deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: new AppBar(
-        title: new Text('Aircraft List'),
+        title: new Text('Select Aircrafts'),
         backgroundColor: AppTheme.lightBlueAccent,
         centerTitle: true,
         shape: RoundedRectangleBorder(
@@ -48,7 +48,7 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new  ListTile(
-                          leading: Icon(Icons.local_airport, size: 70,color: Colors.black,),
+                          leading: CircleAvatar(backgroundImage: AssetImage(mydata[index]['imageurl']),),// no matter how big it is, it won't overflow
                           title: new Text(mydata[index]['title']+'Rs:'+ mydata[index]['price'],
                               style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                           subtitle: new Text("slots available: "+mydata[index]['slots'],

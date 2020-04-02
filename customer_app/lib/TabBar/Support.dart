@@ -31,7 +31,8 @@ class _SupportState extends State<Support>{
             // center the children
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Support", style: TextStyle(color: AppTheme.TextColor, fontSize: 50),)
+              Text("We're here to help You :)", style: TextStyle(color: AppTheme.lightBlueAccent),),
+
             ],
           ),
         ),

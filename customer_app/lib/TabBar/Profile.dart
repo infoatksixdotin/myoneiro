@@ -10,7 +10,6 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => new _ProfileState();
 }
 
-
 class _ProfileState extends State<Profile> {
 
   final databaseReference = Firestore.instance;
@@ -147,14 +146,16 @@ initState() {
                         ),
 
         onPressed: () {
+            /*
             if (taskNameInputController.text.isNotEmpty &&
                 taskPhoneInputController.text.isNotEmpty &&
-				taskEmailInputController.text.isNotEmpty &&
-				taskAgeInputController.text.isNotEmpty) {
-              if (validateUserProfile()) {
+                taskEmailInputController.text.isNotEmpty &&
+                taskAgeInputController.text.isNotEmpty) {
+            }
+            */
+            if (validateUserProfile()) {
                 saveUserChanges();
-              }
-          }
+            }
         },
                         color: AppTheme.lightBlueAccent,
                       ),
@@ -192,5 +193,9 @@ initState() {
       if (!rt) {
         showAlert(context, "Error", "Profile update failed, Please try again..!");
       }
+      else {
+        showAlert(context, "Success", "Your profile updated..!");
+      }
+
   }
 }

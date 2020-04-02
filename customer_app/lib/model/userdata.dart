@@ -28,22 +28,22 @@ class UserData {
     return data;
   }
 
-  String validateUser() {
+String validateUser() {
     String errMsg = "";
     if (!MiscUtil.validateName(this.name)) {
-        errMsg += "Invalid name";
-    }
+        errMsg += "Invalid name\n";
+	  } 
     if (!MiscUtil.validatePhone(this.phone)) {
         errMsg += "Phone number should be 10 digits\n";
     }
-    if (!MiscUtil.validateName(this.name)) {
-        errMsg += "Invalid email";
+    if (!MiscUtil.validateEmail(this.email)) {
+        errMsg += "Invalid email\n";
     }
-    if (!MiscUtil.validateName(this.name)) {
-        errMsg += "Invalid Name";
+    if (this.age < 18) {
+        errMsg += "Invalid age, should be on or above 18\n";
     }
-
-  }
+    return errMsg;
+}
   
   static Future<bool> getUserReq(String id) async  {
     if (m_userData == null) {

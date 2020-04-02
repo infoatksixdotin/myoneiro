@@ -145,15 +145,15 @@ initState() {
                         ),
 
         onPressed: () {
-            if (taskNameInputController.text.isNotEmpty &&
+            /* if (taskNameInputController.text.isNotEmpty &&
                 taskPhoneInputController.text.isNotEmpty &&
 				        taskEmailInputController.text.isNotEmpty &&
 				        taskAgeInputController.text.isNotEmpty) {
-                  if (validateUserProfile()) {
-                    registerUser();
-                  }
-          }
-        },
+          }*/
+            if (validateUserProfile()) {
+                registerUser();
+            }
+          },
                         color: AppTheme.lightBlueAccent,
                       ),
                     ),
