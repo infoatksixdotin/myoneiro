@@ -1,5 +1,7 @@
 import 'package:flutter_app1/utils/firebaseutil.dart';
-const String USERS = "users";
+import 'package:flutter_app1/utils/miscutil.dart';
+import 'package:uuid/uuid.dart';
+
 class UserData {
   String id;
   String name;
@@ -26,26 +28,71 @@ class UserData {
     return data;
   }
 
-  static UserData getUser(int phone) {
-    Map<String, dynamic> jData = FirebaseUtil.readRow(USERS, phone.toString());
-    UserData data = UserData.fromJson(jData);
-    return data;
+  String validateUser() {
+    String errMsg = "";
+    if (!MiscUtil.validateName(this.name)) {
+        errMsg += "Invalid name";
+    }
+    if (!MiscUtil.validatePhone(this.phone)) {
+        errMsg += "Phone number should be 10 digits\n";
+    }
+    if (!MiscUtil.validateName(this.name)) {
+        errMsg += "Invalid email";
+    }
+    if (!MiscUtil.validateName(this.name)) {
+        errMsg += "Invalid Name";
+    }
+
+  }
+  
+  static Future<bool> getUserReq(String id) async  {
+    if (m_userData == null) {
+      Map<String, dynamic> jData = await FirebaseUtil.readRow(USERS, id);
+      if (jData != null) {
+        m_userData = UserData.fromJson(jData);
+        return true;
+      }
+    }
+    return false;
   }
 
   static List<UserData> getUsers() {
-    List<UserData> rt = new List<UserData>();
-    List<Map<String, dynamic>> jDataList = FirebaseUtil.readCollection(USERS);
+    return m_users;
+  }
+
+  static UserData getUser() {
+    return m_userData;
+  }
+ 
+  static Future<bool> getUsersReq() async  {
+    m_users = new List<UserData>();
+    List<Map<String, dynamic>> jDataList = await FirebaseUtil.readCollection(USERS);
     for(int i = 0; i < jDataList.length; i++ ) {
       UserData data = UserData.fromJson(jDataList[i]);
-      rt.add(data);
+      m_users.add(data);
+    }
+    return m_users.length > 0;
+  }
+  static Future<bool> createReq(UserData data) async {
+    data.id = Uuid().v1(); // this should be initialized only on creation
+    bool rt = await FirebaseUtil.create(USERS, data.toJson(), data.id);
+    if (rt) {
+      m_userData = data;
+    }
+    return rt;
+  }
+  static Future<bool> updateReq(UserData data) async {
+    bool rt = await FirebaseUtil.create(USERS, data.toJson(), data.id);
+    if (rt) {
+      m_userData = data;
     }
     return rt;
   }
 
-
-  static bool create(String name, int phone, String email, int age) {
-    UserData data = new UserData(id:phone.toString(), name:name,phone:phone,email: email, age: age);
-    bool rt = FirebaseUtil.createWithCustomRowId(USERS, data.toJson(), data.id);
-    return rt;
+  static Future<bool> deleteUserReq(String id) async  {
+     return await FirebaseUtil.delete(USERS, id) ;
   }
+  static UserData m_userData = null;
+  static List<UserData> m_users = null;
+  static String USERS = "my_oneiro_users";
 }

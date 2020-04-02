@@ -7,6 +7,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app1/model/userdata.dart';
+import 'package:flutter_app1/utils/firebaseutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -27,11 +28,19 @@ void main() {
     });
     */
 
-    test('Read Users', () {
-      List<UserData> users = UserData.getUsers();
-      expect(users.length > 0, isTrue);
+    test('Read Users', ()  async {
+      UserData data = new UserData();
+      bool rt = await UserData.getUsersReq();
+      if (rt == true) {
+          List<UserData> users = UserData.getUsers();
+          expect(users.length > 0, isTrue);
+          for(int i = 0; i < users.length; i++) {
+            bool bDeleted = await UserData.deleteUserReq(users[i].id);
+            bDeleted ? print("deleted: " + users[i].id) : print("NOT deleted: " + users[i].id);
+          }
+      }
     });
-
+    
     /*
     //expect(Counter().value, 0);
 

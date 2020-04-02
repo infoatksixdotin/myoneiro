@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/Leftmenu/drawer_menu.dart';
+import 'package:flutter_app1/model/userdata.dart';
+import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -21,12 +23,15 @@ class _ProfileState extends State<Profile> {
 initState() {
   taskNameInputController = new TextEditingController();
   taskPhoneInputController = new TextEditingController();
-   taskEmailInputController = new TextEditingController();
-    taskAgeInputController = new TextEditingController();
-
+  taskEmailInputController = new TextEditingController();
+  taskAgeInputController = new TextEditingController();
   super.initState();
+  UserData user = UserData.getUser();
+  taskNameInputController.text = user.name;
+  taskPhoneInputController.text = user.phone.toString();
+  taskEmailInputController.text = user.email;
+  taskAgeInputController.text = user.age.toString();
 }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -50,7 +55,7 @@ initState() {
           child: Column(
       children: <Widget>[
               new Container(
-                   padding: new EdgeInsets.all(20.0),
+                   padding: new EdgeInsets.all(0.0),
                     child: new Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[ CircleAvatar(
@@ -64,7 +69,7 @@ initState() {
                     )
                 ),
        new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 0.0),
                    // child: Expanded(
                          child: new TextFormField(
                           keyboardType: TextInputType.text,
@@ -79,10 +84,11 @@ initState() {
                   // )
                 ),
                 new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 0.0),
                     //child: Expanded(
                         child: new TextFormField(
                         keyboardType: TextInputType.phone,
+                        readOnly: true,
                         decoration: new InputDecoration(
                           hintText: ' Phone Number',
                           labelText: 'Phone Number',
@@ -94,7 +100,7 @@ initState() {
                   // )
                 ),
                 new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 0.0),
                     //child: Expanded(
                           child: new TextFormField(
                           keyboardType: TextInputType.emailAddress,
@@ -110,7 +116,7 @@ initState() {
                    // )
                 ),
                 new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 0.0),
                    // child: Expanded(
                                           child: new TextFormField(
                           keyboardType: TextInputType.phone,
@@ -128,8 +134,8 @@ initState() {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Container(
-                      height: 50.0,
-                      width: 210.0,
+                      height: 40.0,
+                      width: 100.0,
                       margin: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 40.0),
                       child: new RaisedButton(
@@ -145,22 +151,9 @@ initState() {
                 taskPhoneInputController.text.isNotEmpty &&
 				taskEmailInputController.text.isNotEmpty &&
 				taskAgeInputController.text.isNotEmpty) {
-              Firestore.instance
-                .collection('users')
-                .add({
-                  "name": taskNameInputController.text,
-                  "phone": taskPhoneInputController.text,
-				          "email": taskEmailInputController.text,
-				          "age": taskAgeInputController.text
-              })
-              .then((result) => {
-                Navigator.pushNamed(context,'/BottomNavBar'),
-                taskNameInputController.clear(),
-                taskPhoneInputController.clear(),
-				taskEmailInputController.clear(),
-				taskAgeInputController.clear()
-              })
-              .catchError((err) => print(err));
+              if (validateUserProfile()) {
+                saveUserChanges();
+              }
           }
         },
                         color: AppTheme.lightBlueAccent,
@@ -170,13 +163,34 @@ initState() {
                 ),
         ],
           ),  
-         
       ),
       ),
     );
-    
+  }
+
+  UserData uiToUserData() {
+    UserData data = UserData.getUser();
+    data.name = taskNameInputController.text.trim();
+    data.email = taskEmailInputController.text.trim();
+    data.age = int.parse(taskAgeInputController.text);
+    data.phone = int.parse(taskPhoneInputController.text);
+    return data;
   }
  
+  bool validateUserProfile() {
+    String errMsg = uiToUserData().validateUser();
+    if (errMsg.isEmpty) {
+      return true;
+    }
+    else {
+      showAlert(context, "Error", errMsg);
+    }
+    return false;
+  }
+  void saveUserChanges() async {
+      bool rt = await UserData.updateReq(uiToUserData());
+      if (!rt) {
+        showAlert(context, "Error", "Profile update failed, Please try again..!");
+      }
+  }
 }
-
-

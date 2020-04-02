@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/appmanager.dart';
+import 'package:flutter_app1/model/userdata.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -12,7 +14,24 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => Navigator.pushNamed(context, "/home"));
+    Timer(Duration(seconds: 5), () => gotoLandingPage());
+  }
+
+  void gotoLandingPage() async {
+    UserData userData = null;
+    String userId = await AppManager.getLocalUserId();
+    if (userId != null && userId.isEmpty == false) {
+        if (await UserData.getUserReq(userId) == true) {
+          userData = UserData.getUser();
+        }
+    }
+    Navigator.of(context).pop();// KU need recheck this part of code
+    if (userData != null) {
+        Navigator.pushNamed(context, "/home");
+    }
+    else {
+      Navigator.pushNamed(context,'/register');
+    }
   }
 
   @override

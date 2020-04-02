@@ -48,6 +48,7 @@ class DrawerMenu {
               color: AppTheme.lightBlueAccent,
             ),
           ),
+          /* KU As of now not needed.
           ListTile(
             title: Text(profileTitle, style: TextStyle(color: AppTheme.lightBlueAccent,),),
             onTap: () {
@@ -59,6 +60,7 @@ class DrawerMenu {
               color: AppTheme.lightBlueAccent,
             ),
           ),
+          */
           ListTile(
             title: Text(logoutTitle, style: TextStyle(color: AppTheme.lightBlueAccent,),),
             onTap: () {

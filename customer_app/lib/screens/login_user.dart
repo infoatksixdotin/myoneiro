@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/model/SMSResponse.dart';
+import 'package:flutter_app1/model/userdata.dart';
+import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -15,16 +17,17 @@ class  LoginAuth extends StatefulWidget {
 
 class _LoginAuthState extends State<LoginAuth> {
   String smsCode;
-  String phoneNo;
+  String phoneNo = "1234567890";
   SMSResponse  smsResponse;
   
   final databaseReference = Firestore.instance;
   TextEditingController taskPhoneInputController;
-
+  
 
   @override
   initState() {
     taskPhoneInputController = new TextEditingController();
+    taskPhoneInputController.text = phoneNo;
     super.initState();
   }
 
@@ -169,7 +172,8 @@ class _LoginAuthState extends State<LoginAuth> {
                         child: RaisedButton(
                             child: Text('Login'),
                             onPressed: (){
-                              postTest(this.phoneNo);
+                              //postTest(this.phoneNo);
+                              onLogin();
                             },
                             textColor: Colors.white,
                             elevation: 7.0,
@@ -189,9 +193,9 @@ class _LoginAuthState extends State<LoginAuth> {
                         child: Text('skip',textAlign: TextAlign.end,),
                         textColor: AppTheme.lightBlueAccent,
                         onPressed: (){
-                          Navigator.pushNamed(context,'/BottomNavBar');
+                          gotoDashBoard();
                         },
-                      )
+                      ),
                     ],
                   ),
                 )
@@ -201,6 +205,16 @@ class _LoginAuthState extends State<LoginAuth> {
         )
     );
   }
+  void onLogin() async {
+   /* UserData user = await UserData.getUser(this.phoneNo);
+    if (user != null) {
+       gotoDashBoard();
+    }
+    else {
+      showAlert(this.context, "Error,","Login Failed");
+    }*/
+  }
+  void gotoDashBoard() {
+    Navigator.pushNamed(context,'/home');
+  }
 }
-
-

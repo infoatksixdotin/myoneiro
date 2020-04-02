@@ -1,25 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseUtil {
-  static bool create(String collectionName, Map<String,dynamic> dataRow) {
+  static Future<bool> create(String collectionName, Map<String,dynamic> dataRow, String rowId) async {
     bool rt = false;
     try {
-      Firestore.instance.collection(collectionName)
-                        .add(dataRow)
-                        .then((result) => {
-                          rt = true})
-                        .catchError((err) => print(err));
-    }
-    catch(e) {
-      print(e);
-    }
-    return rt;
-  }
- 
-  static bool createWithCustomRowId(String collectionName, Map<String,dynamic> dataRow, String rowId) {
-    bool rt = false;
-    try {
-      Firestore.instance.collection(collectionName)
+          await Firestore.instance.collection(collectionName)
                         .document(rowId)
                         .setData(dataRow)
                         .then((result) => {
@@ -29,26 +14,33 @@ class FirebaseUtil {
      catch(e) {
       print(e);
     }
-    
     return rt;
   }
 
-  static bool update() {
-    return false;
+  static Future<bool> update(String collectionName, Map<String,dynamic> dataRow, String rowId) async {
+    bool rt = false;
+    try {
+          await Firestore.instance.collection(collectionName)
+                        .document(rowId)
+                        .setData(dataRow)
+                        .then((result) => {
+                          rt = true})
+                        .catchError((err) => print(err));
+    }
+     catch(e) {
+      print(e);
+    }
+    return rt;
   }
 
-  static List<Map<String, dynamic>> readCollection(String collectionName)  {
+  static Future<List<Map<String, dynamic>>> readCollection(String collectionName) async {
     List<Map<String, dynamic>> rt = List<Map<String, dynamic>>();
     try {
-      Firestore.instance
-          .collection(collectionName)
-          .snapshots()
-          .listen((snapshot) {
-              for(int i = 0 ; i < snapshot.documents.length; i++) {
-                Map<String, dynamic> element = snapshot.documents[i].data;
-                rt.add(element);
-              }
-            });
+        final List<DocumentSnapshot> documents = (await Firestore.instance.collection(collectionName).getDocuments()).documents;
+        for(int i = 0 ; i < documents.length; i++) {
+            Map<String, dynamic> element = documents[i].data;
+            rt.add(element);
+        }
     }
     catch(e) {
       print(e);
@@ -56,10 +48,10 @@ class FirebaseUtil {
     return rt;
   }
 
-  static Map<String, dynamic> readRow(String collectionName, String rowId) {
+  static Future<Map<String, dynamic>> readRow(String collectionName, String rowId) async {
     Map<String, dynamic> rt = Map<String, dynamic>();
     try {
-          Firestore.instance.collection(collectionName)
+          await Firestore.instance.collection(collectionName)
                             .document(rowId)
                             .get()
                             .then((DocumentSnapshot ds) {
@@ -72,8 +64,36 @@ class FirebaseUtil {
     return rt;
   }
   
-  static bool delete(String collectionName, Map dataRow) {
-    return false;
+  static Future<bool> delete(String collectionName, String rowId) async {
+    bool rt = false;
+    try {
+          await Firestore.instance.collection(collectionName)
+                        .document(rowId)
+                        .delete()
+                        .then((result) => {
+                          rt = true})
+                        .catchError((err) => print(err));
+    }
+    catch(e) {
+      print(e);
+    }
+    return rt;
+  }
+
+  // not used in this project.
+  static Future<bool> createWithDefaultId(String collectionName, Map<String,dynamic> dataRow) async {
+    bool rt = false;
+    try {
+          await Firestore.instance.collection(collectionName)
+                        .add(dataRow)
+                        .then((result) => {
+                          rt = true})
+                        .catchError((err) => print(err));
+    }
+    catch(e) {
+      print(e);
+    }
+    return rt;
   }
 
   static void logError(var err) {

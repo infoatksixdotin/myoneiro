@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/appmanager.dart';
+import 'package:flutter_app1/model/userdata.dart';
+import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -7,7 +10,6 @@ class RegistrationScreen extends StatefulWidget {
   _RegistrationScreenState createState() => new _RegistrationScreenState();
 }
 
-
 class _RegistrationScreenState extends State<RegistrationScreen> {
 
   final databaseReference = Firestore.instance;
@@ -15,14 +17,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController taskPhoneInputController;
   TextEditingController taskEmailInputController;
   TextEditingController taskAgeInputController;
-
 @override
 initState() {
   taskNameInputController = new TextEditingController();
+  taskNameInputController.text = "First Name Last Name";
   taskPhoneInputController = new TextEditingController();
-   taskEmailInputController = new TextEditingController();
-    taskAgeInputController = new TextEditingController();
-
+  taskPhoneInputController.text = "1234567890";
+  taskEmailInputController = new TextEditingController();
+  taskEmailInputController.text =  "firsname@gmail.com";
+  taskAgeInputController = new TextEditingController();
+  taskAgeInputController.text = "21";
   super.initState();
 }
 
@@ -145,22 +149,9 @@ initState() {
                 taskPhoneInputController.text.isNotEmpty &&
 				        taskEmailInputController.text.isNotEmpty &&
 				        taskAgeInputController.text.isNotEmpty) {
-          Firestore.instance
-            .collection('users')
-                .add({
-                  "name": taskNameInputController.text,
-                  "phone": taskPhoneInputController.text,
-				          "email": taskEmailInputController.text,
-				          "age": taskAgeInputController.text
-              })
-              .then((result) => {
-                Navigator.pushNamed(context,'/BottomNavBar'),
-                taskNameInputController.clear(),
-                taskPhoneInputController.clear(),
-				        taskEmailInputController.clear(),
-				        taskAgeInputController.clear()
-              })
-              .catchError((err) => print(err));
+                  if (validateUserProfile()) {
+                    registerUser();
+                  }
           }
         },
                         color: AppTheme.lightBlueAccent,
@@ -172,11 +163,40 @@ initState() {
           ),  
          
       ),
+      
       ),
     );
-    
+  }
+
+
+UserData uiToUserData() {
+    UserData data = UserData.getUser();
+    data.name = taskNameInputController.text.trim();
+    data.email = taskEmailInputController.text.trim();
+    data.age = int.parse(taskAgeInputController.text.trim());
+    data.phone = int.parse(taskPhoneInputController.text.trim());
+    return data;
   }
  
+  bool validateUserProfile() {
+    String errMsg = uiToUserData().validateUser();
+    if (errMsg.isEmpty) {
+      return true;
+    }
+    else {
+      showAlert(context, "Error", errMsg);
+    }
+    return false;
+  }
+ 
+  void registerUser() async {
+     if (await UserData.createReq(uiToUserData()) == true) {
+        UserData data = UserData.getUser();
+        AppManager.saveLocal(data);
+        Navigator.pushNamed(context,'/home');
+    }
+    else {
+      showAlert(this.context, "Error,","Registration Failed, Please try again..!");
+    }
+  }
 }
-
-

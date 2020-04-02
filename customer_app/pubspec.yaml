@@ -28,10 +28,14 @@ dependencies:
   cloud_firestore: ^0.13.4+2
   flutter_calendar_carousel: ^1.4.11
   intl: ^0.16.1
+  email_validator:
+  string_validator:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  uuid: 2.0.4
+  shared_preferences:
 
 
 # For information on the generic Dart part of this file, see the
