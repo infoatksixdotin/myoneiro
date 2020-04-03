@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/Leftmenu/drawer_menu.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
+import 'package:intl/intl.dart';
+
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -126,7 +128,8 @@ _pickDate() async {
                       color: Colors.white,
                       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                       child: ListTile(
-                         title: Text("${pickedDate.day}, ${pickedDate.month}, ${pickedDate.year}",style: TextStyle(color: AppTheme.lightBlueAccent),),
+                          title: Text(getFormatedDate(),style: TextStyle(color: AppTheme.lightBlueAccent),),
+                          
                           leading: Icon(
                             Icons.calendar_today,
                             color: AppTheme.lightBlueAccent,
@@ -171,5 +174,11 @@ _pickDate() async {
           ),
         )
         ));
+  }
+
+  String getFormatedDate() {
+    DateFormat fmt = new DateFormat('EEEE, dd-MMM-yyyy');
+    String strDate = fmt.format(pickedDate);
+    return strDate;
   }
 }

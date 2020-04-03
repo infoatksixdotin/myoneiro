@@ -27,13 +27,26 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     Navigator.of(context).pop();// KU need recheck this part of code
     if (userData != null) {
-        Navigator.pushNamed(context, "/home");
+        goToHomePage();
     }
     else {
-      Navigator.pushNamed(context,'/register');
+        gotoLoginPage();
     }
   }
+ 
+  void gotoLoginPage() {
+    Navigator.pushNamed(context,'/login');
+  }
 
+  /*
+  void goToRegistrationPage() {
+    Navigator.pushNamed(context,'/register');
+  }
+  */
+  void goToHomePage() {
+    Navigator.pushNamed(context, "/home");
+  }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

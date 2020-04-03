@@ -6,6 +6,7 @@ import 'package:flutter_app1/model/SMSResponse.dart';
 import 'package:flutter_app1/model/userdata.dart';
 import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
+import 'package:flutter_app1/utils/miscutil.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:ui';
@@ -180,6 +181,7 @@ class _LoginAuthState extends State<LoginAuth> {
                           color: AppTheme.lightBlueAccent,
                         ),
                          ),
+                      /*
                       SizedBox(height: 10,),
                       new FlatButton(
                         child: Text('Register'),
@@ -195,7 +197,8 @@ class _LoginAuthState extends State<LoginAuth> {
                         onPressed: (){
                           gotoDashBoard();
                         },
-                      ),
+                       
+                      ), */
                     ],
                   ),
                 )
@@ -206,15 +209,25 @@ class _LoginAuthState extends State<LoginAuth> {
     );
   }
   void onLogin() async {
-   /* UserData user = await UserData.getUser(this.phoneNo);
-    if (user != null) {
-       gotoDashBoard();
+    int phone = int.parse(phoneNo);
+    if (MiscUtil.validatePhone(phone)) {
+      bool rt = await UserData.getUserByPhoneReq(phone);
+      if (rt) {
+        gotoHomePage();
+      }
+      else {
+        gotoRegistrationPage();
+      }
     }
     else {
-      showAlert(this.context, "Error,","Login Failed");
-    }*/
+      showAlert(this.context, "ERROR","Phone number should be 10 digits");
+    }
   }
-  void gotoDashBoard() {
+  void gotoHomePage() {
     Navigator.pushNamed(context,'/home');
+  }
+
+  void gotoRegistrationPage() {
+    Navigator.pushNamed(context,'/register');
   }
 }

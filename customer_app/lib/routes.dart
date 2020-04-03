@@ -6,13 +6,14 @@ import 'package:flutter_app1/TabBar/bottom_navigation_bar.dart';
 import 'package:flutter_app1/TabBar/dashboard.dart';
 import 'package:flutter_app1/screens/avail_aircrafts.dart';
 import 'package:flutter_app1/screens/avail_seats.dart';
+import 'package:flutter_app1/screens/login_user.dart';
 
 import 'package:flutter_app1/screens/passenger_details.dart';
 import 'package:flutter_app1/screens/payment_options.dart';
 import 'package:flutter_app1/screens/register_user.dart';
 
-
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+  '/login': (BuildContext context) => LoginAuth(),
   '/home': (BuildContext context) => BottomNavBar(),
   '/register': (BuildContext context) => RegistrationScreen(),
   '/DashboardPage': (BuildContext context) => DashboardPage(),

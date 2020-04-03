@@ -44,6 +44,10 @@ String validateUser() {
     }
     return errMsg;
 }
+
+bool checkPhone(int phone) {
+  return phone == this.phone;
+}
   
   static Future<bool> getUserReq(String id) async  {
     if (m_userData == null) {
@@ -92,7 +96,21 @@ String validateUser() {
   static Future<bool> deleteUserReq(String id) async  {
      return await FirebaseUtil.delete(USERS, id) ;
   }
+
+  static Future<bool> getUserByPhoneReq(int phone) async  {
+    UserData existingUserData = null;
+    List<Map<String, dynamic>> jDataList = await FirebaseUtil.readCollection(USERS);
+    for(int i = 0; i < jDataList.length; i++ ) {
+      UserData data = UserData.fromJson(jDataList[i]);
+      if (data.checkPhone(phone)) {
+          existingUserData = data;
+          m_userData = existingUserData;
+          break;
+      }
+    }
+    return existingUserData != null;
+  }
   static UserData m_userData = null;
   static List<UserData> m_users = null;
   static String USERS = "my_oneiro_users";
-}
+ }

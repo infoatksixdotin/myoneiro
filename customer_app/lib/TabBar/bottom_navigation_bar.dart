@@ -4,6 +4,8 @@ import 'package:flutter_app1/TabBar/Bookings.dart';
 import 'package:flutter_app1/TabBar/Profile.dart';
 import 'package:flutter_app1/TabBar/Support.dart';
 import 'package:flutter_app1/TabBar/dashboard.dart';
+import 'package:flutter_app1/appmanager.dart';
+import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 
 
@@ -20,7 +22,6 @@ class BottomNavBarState extends State<BottomNavBar> with SingleTickerProviderSta
   @override
   void initState() {
     super.initState();
-
     // Initialize the Tab Controller
     controller = TabController(length: 4, vsync: this);
   }

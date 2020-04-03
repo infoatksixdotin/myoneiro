@@ -54,7 +54,7 @@ initState() {
           child: Column(
       children: <Widget>[
               new Container(
-                   padding: new EdgeInsets.all(20.0),
+                   padding: new EdgeInsets.all(0.0),
                     child: new Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[ CircleAvatar(
@@ -68,7 +68,7 @@ initState() {
                     )
                 ),
        new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 5.0),
                    // child: Expanded(
                          child: new TextFormField(
                           keyboardType: TextInputType.text,
@@ -83,7 +83,7 @@ initState() {
                   // )
                 ),
                 new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 5.0),
                     //child: Expanded(
                         child: new TextFormField(
                         keyboardType: TextInputType.phone,
@@ -98,7 +98,7 @@ initState() {
                   // )
                 ),
                 new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 5.0),
                     //child: Expanded(
                           child: new TextFormField(
                           keyboardType: TextInputType.emailAddress,
@@ -114,7 +114,7 @@ initState() {
                    // )
                 ),
                 new Container(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 5.0),
                    // child: Expanded(
                                           child: new TextFormField(
                           keyboardType: TextInputType.phone,
@@ -145,15 +145,10 @@ initState() {
                         ),
 
         onPressed: () {
-            /* if (taskNameInputController.text.isNotEmpty &&
-                taskPhoneInputController.text.isNotEmpty &&
-				        taskEmailInputController.text.isNotEmpty &&
-				        taskAgeInputController.text.isNotEmpty) {
-          }*/
-            if (validateUserProfile()) {
-                registerUser();
-            }
-          },
+                          if (validateUserProfile()) {
+                              registerUser();
+                          }
+                        },
                         color: AppTheme.lightBlueAccent,
                       ),
                     ),
@@ -168,9 +163,8 @@ initState() {
     );
   }
 
-
 UserData uiToUserData() {
-    UserData data = UserData.getUser();
+    UserData data = new UserData();
     data.name = taskNameInputController.text.trim();
     data.email = taskEmailInputController.text.trim();
     data.age = int.parse(taskAgeInputController.text.trim());
@@ -190,13 +184,21 @@ UserData uiToUserData() {
   }
  
   void registerUser() async {
-     if (await UserData.createReq(uiToUserData()) == true) {
-        UserData data = UserData.getUser();
-        AppManager.saveLocal(data);
-        Navigator.pushNamed(context,'/home');
-    }
-    else {
+    bool rt = await UserData.createReq(uiToUserData());
+     if (!rt) {
       showAlert(this.context, "Error,","Registration Failed, Please try again..!");
     }
+    else {
+      gotoHomePage();
+    }
+   }
+
+  void gotoHomePage() {
+    AppManager.setNewUser(true);
+    Navigator.of(context).pop();// KU need recheck this part of code
+    UserData data = UserData.getUser();
+    AppManager.saveLocal(data);
+    Navigator.pushNamed(context,'/home');
+    showAlert(context, "Congratulation", "Your profile created ..!   50% discount for next 5 rides, Offer Valid till 31st April, Use coupn code: K6APR05");
   }
 }
