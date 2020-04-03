@@ -4,6 +4,7 @@ import 'package:flutter_app1/model/userdata.dart';
 import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app1/utils/otputil.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -32,6 +33,8 @@ initState() {
 
   @override
   Widget build(BuildContext context) {
+     final String tmpPhone = ModalRoute.of(context).settings.arguments;
+     taskPhoneInputController.text = tmpPhone;
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
@@ -145,9 +148,7 @@ initState() {
                         ),
 
         onPressed: () {
-                          if (validateUserProfile()) {
-                              registerUser();
-                          }
+                          validateUserProfile();
                         },
                         color: AppTheme.lightBlueAccent,
                       ),
@@ -172,15 +173,28 @@ UserData uiToUserData() {
     return data;
   }
  
-  bool validateUserProfile() {
-    String errMsg = uiToUserData().validateUser();
+  Future<void> validateUserProfile() async  {
+    bool rt = false;
+    UserData data =  uiToUserData();
+    String errMsg = data.validateUser();
     if (errMsg.isEmpty) {
-      return true;
+      rt = await OTPUtil.verifyYourDevice(this.context, data.phone);
+      if (rt) {
+        rt = await UserData.createReq(uiToUserData());
+        if (!rt) {
+          showAlert(this.context, "Error,","Registration Failed, Please try again..!");
+        }
+        else {
+          gotoHomePage();
+        }
+      }
+      else {
+          showAlert(context, "Error", "OTP verification failed.");
+      }
     }
     else {
       showAlert(context, "Error", errMsg);
     }
-    return false;
   }
  
   void registerUser() async {

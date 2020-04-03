@@ -1,15 +1,13 @@
-import 'dart:convert';
-import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/appmanager.dart';
 import 'package:flutter_app1/model/SMSResponse.dart';
 import 'package:flutter_app1/model/userdata.dart';
 import 'package:flutter_app1/screens/alertdialog.dart';
+import 'package:flutter_app1/screens/register_user.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:flutter_app1/utils/miscutil.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:ui';
+import 'package:flutter_app1/utils/otputil.dart';
 
 class  LoginAuth extends StatefulWidget {
   @override
@@ -32,95 +30,7 @@ class _LoginAuthState extends State<LoginAuth> {
     super.initState();
   }
 
-  Future<bool> validateSMS(String smsCode, String userEnteredSMS) async {
-    if (smsCode == userEnteredSMS) {
-      print("sms matched");
-     // writeCredentials();
-      Navigator.of(context).pop();
-      Navigator.of(context).pushReplacementNamed('/BottomNavBar');
-      return true;
-    }
-    else {
-      print("sms not matched.");
-    }
-    return false;
-  }
-
-  postTest(String phoneNo) async {
-
-    int min = 100000; //min and max values act as your 6 digit range kannan sir code
-    int max = 999999;
-    var randomizer = new Random();
-    var rNum = min + randomizer.nextInt(max - min);
-
-
-    final uri = 'https://api.textlocal.in/send/';
-    var requestBody = {
-      'apikey':'vyX9h4mukPI-PMb9KOZRTBetHiC4NSzbgpTAz8VmVC',
-      'numbers':phoneNo,
-      'sender':'KSDEMO',
-      'message':rNum.toString() +' is your FLASH verification code. Code valid for 10 minutes only, one time use. Do not share with anyone. Happy Shopping!',
-    };
-    http.Response response = await http.post(
-      uri,
-      body: requestBody,
-    );
-
-
-    var parsedJson = json.decode(response.body);
-    var statusValue = parsedJson['status'];
-    if (statusValue == "success") {
-      var messageValue = parsedJson['message'];
-      String contentValue = messageValue['content'];
-      String smsValue = contentValue.substring(0,6);
-      smsCodeDialog(this.context,smsValue);
-
-    }
-
-    print(response.body);
-  }
-
-  Future<bool> smsCodeDialog(BuildContext context, String smsCode) {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return new AlertDialog(
-            title: Text('Enter the Code'),
-            content: TextField(
-              onChanged: (value) {
-                this.smsCode = value;
-              },
-              keyboardType: TextInputType.phone,
-            ),
-            contentPadding: EdgeInsets.all(10.0),
-
-            actions: <Widget>[
-              new RaisedButton(
-                child: Text('Done'),
-                onPressed: (){
-                 // Future<bool>rt = validateSMS(smsCode,  this.smsCode);
-                  if (taskPhoneInputController.text.isNotEmpty) {
-              Firestore.instance
-                .collection('LoginUsers')
-                .add({
-                  "phone": taskPhoneInputController.text,
-              })
-              .then((result) => {
-              validateSMS(smsCode,  this.smsCode),
-                taskPhoneInputController.clear(),
-              })
-              
-              .catchError((err) => print(err));
-          }
-                },
-              )
-            ],
-          );
-        });
-  }
-
-  @override
+ @override
   Widget build(BuildContext context) {
     return new Scaffold(
       resizeToAvoidBottomInset: false,
@@ -181,24 +91,6 @@ class _LoginAuthState extends State<LoginAuth> {
                           color: AppTheme.lightBlueAccent,
                         ),
                          ),
-                      /*
-                      SizedBox(height: 10,),
-                      new FlatButton(
-                        child: Text('Register'),
-                        textColor: AppTheme.lightBlueAccent,
-                        onPressed: (){
-                          Navigator.pushNamed(context,'/register');
-                        },
-                      ),
-                      SizedBox(height: 10,),
-                      new FlatButton(
-                        child: Text('skip',textAlign: TextAlign.end,),
-                        textColor: AppTheme.lightBlueAccent,
-                        onPressed: (){
-                          gotoDashBoard();
-                        },
-                       
-                      ), */
                     ],
                   ),
                 )
@@ -213,7 +105,15 @@ class _LoginAuthState extends State<LoginAuth> {
     if (MiscUtil.validatePhone(phone)) {
       bool rt = await UserData.getUserByPhoneReq(phone);
       if (rt) {
-        gotoHomePage();
+        bool rt = await OTPUtil.verifyYourDevice(context, phone);
+        if (rt) {
+          print("otp match = " + rt.toString());
+          AppManager.saveLocal(UserData.getUser());
+          gotoHomePage();
+        }
+         else {
+           print("otp match = " + rt.toString());
+        }
       }
       else {
         gotoRegistrationPage();
@@ -228,6 +128,16 @@ class _LoginAuthState extends State<LoginAuth> {
   }
 
   void gotoRegistrationPage() {
-    Navigator.pushNamed(context,'/register');
-  }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RegistrationScreen(),
+        // Pass the arguments as part of the RouteSettings. The
+        // DetailScreen reads the arguments from these settings.
+        settings: RouteSettings(
+        arguments: phoneNo,
+        ),
+      ),
+    );
+   }
 }
