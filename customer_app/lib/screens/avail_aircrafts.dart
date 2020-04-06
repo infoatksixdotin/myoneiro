@@ -26,7 +26,7 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
       ),
       body: Container(
         width: 500,
-       // height: 500,    
+       // height: 500,
         padding: EdgeInsets.all(0.0),
         child: new Center(
           child: new FutureBuilder(
@@ -48,11 +48,11 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new  ListTile(
-                          leading: CircleAvatar(backgroundImage: AssetImage(mydata[index]['imageurl']),),// no matter how big it is, it won't overflow
+                          leading: CircleAvatar(radius: 30.0,backgroundImage: AssetImage(mydata[index]['imageurl']),),// no matter how big it is, it won't overflow
                           title: new Text(mydata[index]['title']+'Rs:'+ mydata[index]['price'],
-                              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+                              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),
                           subtitle: new Text("slots available: "+mydata[index]['slots'],
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black,fontSize: 15)),
                               dense: true,
                               onTap: (){
                                  Navigator.pushNamed(context,'/availSeats');
