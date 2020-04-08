@@ -198,6 +198,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.4"
+  paytm:
+    dependency: "direct main"
+    description:
+      name: paytm
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   pedantic:
     dependency: transitive
     description:

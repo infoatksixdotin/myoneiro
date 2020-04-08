@@ -48,8 +48,8 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new  ListTile(
-                          leading: CircleAvatar(radius: 30.0,backgroundImage: AssetImage(mydata[index]['imageurl']),),// no matter how big it is, it won't overflow
-                          title: new Text(mydata[index]['title']+'Rs:'+ mydata[index]['price'],
+                          leading: CircleAvatar(radius: 30.0,backgroundImage: AssetImage(mydata[index]['imageurl']),), // no matter how big it is, it won't overflow
+                          title: new Text(mydata[index]['title']+'              Rs:'+ mydata[index]['price'],
                               style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),
                           subtitle: new Text("slots available: "+mydata[index]['slots'],
                               style: TextStyle(color: Colors.black,fontSize: 15)),
@@ -67,12 +67,13 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                                 //Navigator.pushNamed(context,'/aircraft_slot');
                               },
                             ),
-                            FlatButton(
+                            RaisedButton(
                               child: Text('Book',
-                                  style: TextStyle(color: Colors.lightBlueAccent)),
+                                  style: TextStyle(color: Colors.white)),
                               onPressed: () {
                                 Navigator.pushNamed(context,'/availSeats');
                                 },
+                              color: AppTheme.lightBlueAccent,
                           ),
                           ],
                           ),

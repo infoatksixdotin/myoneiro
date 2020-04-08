@@ -118,14 +118,18 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        //const Spacer(),
-                        RaisedButton(
-                          color: AppTheme.lightBlueAccent,
-                          onPressed: _submittable() ? _submit : null,
-                          child: const Text('Next',style: TextStyle(color: Colors.white),),
+                    SizedBox(height: 20),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                          new Container(
+                            height: 50.0,
+                            width: 210.0,
+                            child: new RaisedButton(
+                                    color: AppTheme.lightBlueAccent,
+                                    child: new Text('Pay', style: new TextStyle(color: Colors.white),),
+                                    onPressed: _submittable() ? _submit : null,
+                          ),
                         ),
                       ],
                     ),
