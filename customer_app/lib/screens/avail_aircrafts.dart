@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_app1/theme/appTheme.dart';
@@ -25,19 +26,15 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
         ),
       ),
       body: Container(
-        width: 500,
-       // height: 500,
-        padding: EdgeInsets.all(0.0),
         child: new Center(
-          child: new FutureBuilder(
-            future: DefaultAssetBundle.of(context)
-                .loadString('json/aircraftdata.json'),
-            initialData: null,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //decode json
-              var mydata = json.decode(snapshot.data.toString());
+          child: StreamBuilder(
+            stream: Firestore.instance.collection('aircraft').snapshots(),
+            builder: (context, snapshot) {
+              if(!snapshot.hasData) Text('Loading data....Please Wait...');
               return new ListView.builder(
+                itemCount: snapshot.data.documents.length,
                 itemBuilder: (BuildContext context, int index) {
+                  DocumentSnapshot ds = snapshot.data.documents[index];
                   return new Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -47,22 +44,24 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        new  ListTile(
-                          leading: CircleAvatar(radius: 30.0,backgroundImage: AssetImage(mydata[index]['imageurl']),), // no matter how big it is, it won't overflow
-                          title: new Text(mydata[index]['title']+'              Rs:'+ mydata[index]['price'],
-                              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),
-                          subtitle: new Text("slots available: "+mydata[index]['slots'],
-                              style: TextStyle(color: Colors.black,fontSize: 15)),
-                              dense: true,
-                              onTap: (){
-                                 Navigator.pushNamed(context,'/availSeats');
-                              },
-                                    ),
+                        new ListTile(
+                          leading: CircleAvatar(radius: 30.0, backgroundImage: AssetImage('assets/aircrafts/mehta.jpg'),), // no matter how big it is, it won't overflow
+                          title: new Text(snapshot.data.documents[index]['title'] +
+                              '                   Rs:' + snapshot.data.documents[index]['price'].toString(),
+                              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15)),
+                          subtitle: new Text("Slots Available: " + snapshot.data.documents[index]['slots'].toString(),
+                              style: TextStyle(color: Colors.black, fontSize: 15)),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/availSeats');
+                          },
+                        ),
                         ButtonBar(
                           children: <Widget>[
-                              FlatButton(
-                              child: new Text(mydata[index]['group'],
-                                  style: TextStyle(color: Colors.lightBlueAccent)),
+                            FlatButton(
+                              child: new Text(
+                                  snapshot.data.documents[index]['group'],
+                                  style: TextStyle(
+                                      color: Colors.lightBlueAccent,fontWeight: FontWeight.bold)),
                               onPressed: () {
                                 //Navigator.pushNamed(context,'/aircraft_slot');
                               },
@@ -81,7 +80,6 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                     ),
                   );
                 },
-                itemCount: mydata == null ? 0 : mydata.length,
               );
             },
           ),
