@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/model/userdata.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 
 class PassengerDetails extends StatefulWidget {
@@ -8,18 +10,37 @@ class PassengerDetails extends StatefulWidget {
   _PassengerDetailsState createState() => _PassengerDetailsState();
 }
 class _PassengerDetailsState extends State<PassengerDetails> {
+  final databaseReference = Firestore.instance;
+  TextEditingController taskNameInputController;
+  TextEditingController taskPhoneInputController;
+  TextEditingController taskEmailInputController;
+  TextEditingController taskAgeInputController;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _agreedToTOS = true;
   bool checkboxValue = true;
 
-
+  @override
+  initState() {
+    taskNameInputController = new TextEditingController();
+    taskPhoneInputController = new TextEditingController();
+    taskEmailInputController = new TextEditingController();
+    taskAgeInputController = new TextEditingController();
+    super.initState();
+    UserData user = UserData.getUser();
+    taskNameInputController.text = user.name;
+    taskPhoneInputController.text = user.phone.toString();
+    taskEmailInputController.text = user.email;
+    taskAgeInputController.text = user.age.toString();
+  }
   bool _submittable() {
     return _agreedToTOS;
   }
 
   void _submit() {
-    Navigator.pushNamed(context,'/PaymentOptions');
-    _formKey.currentState.validate();
+    if (_formKey.currentState.validate()) {
+      Navigator.pushNamed(context, '/PaymentOptions');
+    }
   }
 
   void _setAgreedToTOS(bool newValue) {
@@ -33,7 +54,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          "Passenger Details", style: TextStyle(color: AppTheme.whiteColor,),),
+          "Passenger Details...", style: TextStyle(color: AppTheme.whiteColor,),),
         backgroundColor: AppTheme.lightBlueAccent,
         iconTheme: new IconThemeData(color: AppTheme.whiteColor),
         centerTitle: true,
@@ -43,100 +64,123 @@ class _PassengerDetailsState extends State<PassengerDetails> {
           ),
         ),
       ),
+      backgroundColor: AppTheme.whiteColor,
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20,),
-              Align(alignment: Alignment.topLeft,
-                child: Container(
-                  child: Text("Passenger Details",
-                    style: TextStyle(fontWeight: FontWeight.bold),),
-                ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
               ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Name',
-                        icon: Icon(Icons.person, color: Colors.lightBlueAccent),
-                      ),
-                      validator: (String value) {
-                        if (value.trim().isEmpty) {
-                          return 'Name is required';
-                        }
-                      },
+              semanticContainer: true,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              elevation: 5,margin: EdgeInsets.all(20),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 20,),
+                  Align(alignment: Alignment.topCenter,
+                    child: Container(
+                      child: Text("Passenger Details",
+                        style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 20),),
                     ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Phone',
-                        icon: Icon(Icons.call, color: Colors.lightBlueAccent),
-                      ),
-                      validator: (String value) {
-                        if (value.trim().isEmpty) {
-                          return 'Phone is required';
-                        }
-                      },
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Age',
-                        icon: Icon(Icons.add, color: Colors.lightBlueAccent),
-                      ),
-                      validator: (String value) {
-                        if (value.trim().isEmpty) {
-                          return 'Age is required';
-                        }
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Gender'),
-                        addRadioButton(0, 'Male'),
-                        addRadioButton(1, 'Female'),
-                      ],
-                    ),
-                    const SizedBox(height: 120.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Row(
+                  ),
+                  SizedBox(height: 20),
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Checkbox(
-                            value: _agreedToTOS,
-                            onChanged: _setAgreedToTOS,
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                              icon: Icon(Icons.person, color: Colors.lightBlueAccent),
+                            ),
+//                            validator: (String value) {
+//                              if (value.trim().isEmpty) {
+//                                return 'Name is required';
+//                              }
+//                            },
+                            controller: taskNameInputController,
                           ),
-                          GestureDetector(
-                            onTap: () => _setAgreedToTOS(!_agreedToTOS),
-                            child: const Text(
-                              'I agree to the Terms of Services and Privacy Policy',
+                          SizedBox(height: 20),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Phone',
+                              icon: Icon(Icons.call, color: Colors.lightBlueAccent),
+                            ),
+//                            validator: (String value) {
+//                              if (value.trim().isEmpty) {
+//                                return 'Phone is required';
+//                              }
+//                            },
+                              controller: taskPhoneInputController
+                          ),
+                          SizedBox(height: 20),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Age',
+                              icon: Icon(Icons.add, color: Colors.lightBlueAccent),
+                            ),
+//                            validator: (String value) {
+//                              if (value.trim().isEmpty) {
+//                                return 'Age is required';
+//                              }
+//                            },
+                            controller: taskAgeInputController,
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Gender',style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 15)),
+                              addRadioButton(0, 'Male'),
+                              addRadioButton(1, 'Female'),
+                            ],
+                          ),
+                          //const SizedBox(height: 120.0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: Row(
+                              children: <Widget>[
+                                Checkbox(
+                                  value: _agreedToTOS,
+                                  onChanged: _setAgreedToTOS,
+                                  activeColor: Colors.lightBlueAccent,
+                                ),
+                                GestureDetector(
+                                  onTap: () => _setAgreedToTOS(!_agreedToTOS),
+                                  child: const Text(
+                                    'I agree to the Terms of Services and Privacy Policy',
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                          SizedBox(height: 40),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                                new Container(
+                                  height:50.0, width: 170.0,
+                                  child: new RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
+                                          color: AppTheme.lightBlueAccent,
+                                          child: new Text('Pay', style: new TextStyle(color: Colors.white),),
+                                          onPressed: _submittable() ? _submit : Navigator.pushNamed(context, '/PaymentOptions'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                          new Container(
-                            height: 50.0,
-                            width: 210.0,
-                            child: new RaisedButton(
-                                    color: AppTheme.lightBlueAccent,
-                                    child: new Text('Pay', style: new TextStyle(color: Colors.white),),
-                                    onPressed: _submittable() ? _submit : null,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -163,5 +207,14 @@ class _PassengerDetailsState extends State<PassengerDetails> {
         Text(title)
       ],
     );
+  }
+
+  UserData uiToUserData() {
+    UserData data = UserData.getUser();
+    data.name = taskNameInputController.text.trim();
+    data.email = taskEmailInputController.text.trim();
+    data.age = int.parse(taskAgeInputController.text);
+    data.phone = int.parse(taskPhoneInputController.text);
+    return data;
   }
 }

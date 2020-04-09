@@ -69,7 +69,6 @@ initState() {
                 ),
        new Container(
                     padding: const EdgeInsets.only(top: 0.0),
-                   // child: Expanded(
                          child: new TextFormField(
                           keyboardType: TextInputType.text,
                           decoration: new InputDecoration(
@@ -80,11 +79,9 @@ initState() {
                           ),
                           controller: taskNameInputController,
                       ),
-                  // )
                 ),
                 new Container(
                     padding: const EdgeInsets.only(top: 0.0),
-                    //child: Expanded(
                         child: new TextFormField(
                         keyboardType: TextInputType.phone,
                         readOnly: true,
@@ -96,11 +93,9 @@ initState() {
                         ),
                         controller: taskPhoneInputController,
                       ),
-                  // )
                 ),
                 new Container(
                     padding: const EdgeInsets.only(top: 0.0),
-                    //child: Expanded(
                           child: new TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           // Use email input type for emails.
@@ -111,13 +106,11 @@ initState() {
                                 Icons.email, color: AppTheme.lightBlueAccent,)
                                 ),
                                 controller: taskEmailInputController,
-                      ),     
-                   // )
+                      ),
                 ),
                 new Container(
                     padding: const EdgeInsets.only(top: 0.0),
-                   // child: Expanded(
-                                          child: new TextFormField(
+                  child: new TextFormField(
                           keyboardType: TextInputType.phone,
                           decoration: new InputDecoration(
                             hintText: 'Age',
@@ -127,17 +120,19 @@ initState() {
                           ),
                           controller: taskAgeInputController,
                       ),
-                   // )
                 ),
            new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Container(
-                      height: 40.0,
-                      width: 100.0,
+                      height: 50.0,
+                      width: 190.0,
                       margin: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 40.0),
+                          horizontal: 40.0, vertical: 40.0),
                       child: new RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
                         child: new Text(
                           'Save',
                           style: new TextStyle(
@@ -145,18 +140,11 @@ initState() {
                           ),
                         ),
 
-        onPressed: () {
-            /*
-            if (taskNameInputController.text.isNotEmpty &&
-                taskPhoneInputController.text.isNotEmpty &&
-                taskEmailInputController.text.isNotEmpty &&
-                taskAgeInputController.text.isNotEmpty) {
-            }
-            */
-            if (validateUserProfile()) {
-                saveUserChanges();
-            }
-        },
+                        onPressed: () {
+                            if (validateUserProfile()) {
+                                saveUserChanges();
+                            }
+                        },
                         color: AppTheme.lightBlueAccent,
                       ),
                     ),

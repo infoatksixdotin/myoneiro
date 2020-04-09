@@ -50,7 +50,8 @@ class OTPUtil {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return new AlertDialog(
-            backgroundColor: AppTheme.lightBlueAccent,
+            shape: RoundedRectangleBorder(borderRadius:
+            BorderRadius.all(Radius.circular(15),),),
             title: Text('Enter the OTP'),
             content: TextField(
               onChanged: (value) {
@@ -63,7 +64,7 @@ class OTPUtil {
             actions: <Widget>[
                 new RaisedButton(
                   child: Text('Cancel'),
-                  color: AppTheme.lightBlueAccent,
+                  color: Colors.grey,
                   textColor: Colors.white,
                   onPressed: (){
                     Navigator.of(context).pop();

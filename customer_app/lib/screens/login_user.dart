@@ -16,7 +16,7 @@ class  LoginAuth extends StatefulWidget {
 
 class _LoginAuthState extends State<LoginAuth> {
   String smsCode;
-  String phoneNo = "1234567890";
+  String phoneNo = "9999999999";
   SMSResponse  smsResponse;
   
   final databaseReference = Firestore.instance;
@@ -33,13 +33,28 @@ class _LoginAuthState extends State<LoginAuth> {
  @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        appBar: new AppBar(
+          title: new Text(
+            "Login", style: TextStyle(color: AppTheme.whiteColor,),),
+          backgroundColor: AppTheme.lightBlueAccent,
+          iconTheme: new IconThemeData(color: AppTheme.lightBlueAccent),
+          centerTitle: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
+          leading: new Container(),
+        ),
       resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20,),
+                SizedBox(height: 40,),
+                Text('Welcome to MyOneiro!',style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold, fontSize: 30)),
+                SizedBox(height: 30,),
                 CircleAvatar(
                   radius: 80.0,
                   backgroundColor: Colors.black,
@@ -71,16 +86,17 @@ class _LoginAuthState extends State<LoginAuth> {
                         controller: taskPhoneInputController,
                       ),
                   // )
-                ),
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                            )
+                          ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 30,),
                        Container(
+                         height:50.0, width: 170.0,
                         child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
                             child: Text('Login'),
                             onPressed: (){
                               //postTest(this.phoneNo);

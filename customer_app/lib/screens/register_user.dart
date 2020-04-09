@@ -38,19 +38,24 @@ initState() {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          "Register", style: TextStyle(color: AppTheme.lightBlueAccent,),),
-        backgroundColor: AppTheme.whiteColor,
+          "Register", style: TextStyle(color: AppTheme.whiteColor,),),
+        backgroundColor: AppTheme.lightBlueAccent,
         iconTheme: new IconThemeData(color: AppTheme.lightBlueAccent),
         centerTitle: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
         actions: <Widget>[
           new IconButton(
-            icon: new Icon(Icons.close),
+            icon: new Icon(Icons.close,color: Colors.white,),
             onPressed: () => Navigator.of(context).pop(null),
           ),
         ],
         leading: new Container(),
       ),
-      backgroundColor: AppTheme.ScaffoldBackgroundColor,
+      backgroundColor: AppTheme.whiteColor,
       body: SingleChildScrollView(
     child:  Container(
           padding: new EdgeInsets.all(20.0),
@@ -137,9 +142,11 @@ initState() {
                     new Container(
                       height: 50.0,
                       width: 210.0,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 40.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 40.0),
                       child: new RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
                         child: new Text(
                           'Register',
                           style: new TextStyle(
@@ -147,7 +154,7 @@ initState() {
                           ),
                         ),
 
-        onPressed: () {
+                        onPressed: () {
                           validateUserProfile();
                         },
                         color: AppTheme.lightBlueAccent,

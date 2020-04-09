@@ -72,9 +72,12 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       new Container(
-                        height: 50.0,
-                        width: 210.0,
+                        height:50.0, width: 170.0,
+                        margin: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 100.0),
                         child: new RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
                           color: AppTheme.lightBlueAccent,
                           child: new Text('Pay', style: new TextStyle(color: Colors.white),),
                             onPressed: ()
@@ -114,7 +117,7 @@ void generateCheckSum() async {
 
   String callBackUrl =
   'https://securegw.paytm.in/theia/paytmCallback?ORDER_ID='  + orderId; //flash
-  // 'https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=' + orderId; //github
+   //'https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=' + orderId; //github
 
   print("Response :" + response.body);
 

@@ -74,7 +74,7 @@ _pickDate() async {
           dropdownTValue = newValue;
         });
       },
-      items: <String>['6AM-8AM', '3PM-5PM']
+      items: <String>['6AM-8AM']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -150,10 +150,12 @@ _pickDate() async {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Container(
-                     // height:50.0,
-                     // width: 210.0,
+                     height:50.0, width: 170.0,
                       margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 40.0),
                       child: new RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
                         child: new Text(
                           'Search',
                           style: new TextStyle(

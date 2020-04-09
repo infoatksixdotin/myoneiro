@@ -31,6 +31,9 @@ dependencies:
   email_validator:
   string_validator:
   paytm: ^1.0.0
+  flutter_ticket_widget: ^0.0.1
+  flutter_share_me: ^0.9.1
+
 
 
 dev_dependencies:
