@@ -46,9 +46,9 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           new ListTile(
-                            leading: CircleAvatar(radius: 30.0, backgroundImage: AssetImage('assets/aircrafts/mehta.jpg'),), // no matter how big it is, it won't overflow
+                            leading: CircleAvatar(radius: 35.0, backgroundImage: AssetImage('assets/aircrafts/mehta.jpg'),), // no matter how big it is, it won't overflow
                             title: new Text(snapshot.data.documents[index]['title'] +
-                                '           Rs: ' + snapshot.data.documents[index]['price'].toString(),
+                                '    Rs: ' + snapshot.data.documents[index]['price'].toString(),
                                 style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15)),
                             subtitle: new Text("Slots Available: " + snapshot.data.documents[index]['slots'].toString(),
                                 style: TextStyle(color: Colors.black, fontSize: 15)),

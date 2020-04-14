@@ -15,7 +15,7 @@ class _TicketScreenState extends State<TicketScreen> {
       backgroundColor: Colors.black45,
       appBar: new AppBar(
         title: new Text(
-          "Download Ticket", style: TextStyle(color: AppTheme.whiteColor,),),
+          "Your Ticket", style: TextStyle(color: AppTheme.whiteColor,),),
         backgroundColor: AppTheme.lightBlueAccent,
         centerTitle: true,
         shape: RoundedRectangleBorder(

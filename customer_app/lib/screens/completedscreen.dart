@@ -38,8 +38,8 @@ class _completedscreenState extends State<completedscreen> {
                       children: <Widget>[
                         new  ListTile(
                           //leading: Icon(Icons.local_airport, size: 70,color: Colors.black,),
-                          leading: CircleAvatar(backgroundImage: AssetImage(mydata[index]['imageurl']),),// no matter how big it is, it won't overflow
-                          title: new Text(mydata[index]['title']+'Rs:'+ mydata[index]['price'],
+                          leading: CircleAvatar(radius: 35.0,backgroundImage: AssetImage(mydata[index]['imageurl']),),// no matter how big it is, it won't overflow
+                          title: new Text(mydata[index]['title']+'    Rs:'+ mydata[index]['price'],
                               style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                           subtitle: new Text("slots available: "+mydata[index]['slots'],
                               style: TextStyle(color: Colors.black)),

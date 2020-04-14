@@ -39,7 +39,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
 
   void _submit() {
     if (_formKey.currentState.validate()) {
-      Navigator.pushNamed(context, '/PaymentOptions');
+      Navigator.pushNamed(context, '/TicketScreen');
     }
   }
 
@@ -75,14 +75,14 @@ class _PassengerDetailsState extends State<PassengerDetails> {
               ),
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              elevation: 5,margin: EdgeInsets.all(20),
+              elevation: 0,margin: EdgeInsets.all(10),
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20,),
-                  Align(alignment: Alignment.topCenter,
+                  Align(alignment: Alignment.topLeft,
                     child: Container(
                       child: Text("Passenger Details",
-                        style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 20),),
+                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -168,8 +168,8 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                                       borderRadius: BorderRadius.circular(50.0),
                                     ),
                                           color: AppTheme.lightBlueAccent,
-                                          child: new Text('Pay', style: new TextStyle(color: Colors.white),),
-                                          onPressed: _submittable() ? _submit : Navigator.pushNamed(context, '/PaymentOptions'),
+                                          child: new Text('Pay-COD', style: new TextStyle(color: Colors.white),),
+                                          onPressed: _submittable() ? _submit : Navigator.pushNamed(context, '/TicketScreen'),
                                 ),
                               ),
                             ],
