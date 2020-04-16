@@ -26,4 +26,22 @@ class MiscUtil {
     } 
     return true;
   }
+  static bool validateLocation(String location) {
+    if (location == null || location.isEmpty) {
+      return false;
+    }
+
+    List<String> subitems = location.split(" ");
+    for(int i = 0; i< subitems.length; i++) {
+      if (!isAlpha(subitems[i].trim())) {
+        return false;
+      }
+      break;
+    }
+    return true;
+  }
+  static bool validatePincode(int pincode) {
+    String strPincode = pincode.toString();
+    return (strPincode.length == 6);
+  }
 }

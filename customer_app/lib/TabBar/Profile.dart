@@ -17,6 +17,8 @@ class _ProfileState extends State<Profile> {
   TextEditingController taskPhoneInputController;
   TextEditingController taskEmailInputController;
   TextEditingController taskAgeInputController;
+  TextEditingController taskLocationInputController;
+  TextEditingController taskPincodeInputController;
 
 @override
 initState() {
@@ -24,12 +26,18 @@ initState() {
   taskPhoneInputController = new TextEditingController();
   taskEmailInputController = new TextEditingController();
   taskAgeInputController = new TextEditingController();
+  taskLocationInputController = new TextEditingController();
+  taskPincodeInputController = new TextEditingController();
+
   super.initState();
+
   UserData user = UserData.getUser();
   taskNameInputController.text = user.name;
   taskPhoneInputController.text = user.phone.toString();
   taskEmailInputController.text = user.email;
   taskAgeInputController.text = user.age.toString();
+  taskLocationInputController.text = user.location;
+  taskPincodeInputController.text = user.pincode.toString();
 }
   @override
   Widget build(BuildContext context) {
@@ -50,7 +58,7 @@ initState() {
       drawer:DrawerMenu.getMenu(context),
       body: SingleChildScrollView(
     child:  Container(
-          padding: new EdgeInsets.all(20.0),
+          padding: new EdgeInsets.all(8.0),
           child: Column(
       children: <Widget>[
               new Container(
@@ -58,7 +66,7 @@ initState() {
                     child: new Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[ CircleAvatar(
-                  radius: 80.0,
+                  radius: 60.0,
                   backgroundColor: Colors.black,
                   backgroundImage: AssetImage('assets/logo/images.jpg'),
                   //test-image.png
@@ -73,7 +81,7 @@ initState() {
                           keyboardType: TextInputType.text,
                           decoration: new InputDecoration(
                             hintText: ' Name',
-                            labelText: 'Name',                
+                            labelText: 'Name',
                             icon: new Icon(
                               Icons.person, color: AppTheme.lightBlueAccent,),
                           ),
@@ -121,12 +129,48 @@ initState() {
                           controller: taskAgeInputController,
                       ),
                 ),
+        new Container(
+          padding: const EdgeInsets.only( top: 5.0 ),
+          child: new TextFormField(
+            keyboardType: TextInputType.text,
+            decoration: new InputDecoration(
+              hintText: 'Location',
+              labelText: 'Location',
+              icon: new Icon(
+                Icons.location_city, color: AppTheme.lightBlueAccent, ),
+            ),
+            controller: taskLocationInputController,
+          ),
+        ),
+        new Container(
+          padding: const EdgeInsets.only( top: 5.0 ),
+          child: new TextFormField(
+            keyboardType: TextInputType.phone,
+            decoration: new InputDecoration(
+              hintText: 'Pincode',
+              labelText: 'Pincode',
+              icon: new Icon(
+                Icons.edit_location, color: AppTheme.lightBlueAccent, ),
+            ),
+            controller: taskPincodeInputController,
+          ),
+        ),
+        Row (
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text ( 'Gender', style: TextStyle ( color: Colors.lightBlueAccent,
+                fontWeight: FontWeight.bold,
+                fontSize: 15 ) ),
+            addRadioButton ( 0, 'Male' ),
+            addRadioButton ( 1, 'Female' ),
+          ],
+        ),
            new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Container(
                       height: 50.0,
-                      width: 190.0,
+                      width: 130.0,
                       margin: const EdgeInsets.symmetric(
                           horizontal: 40.0, vertical: 40.0),
                       child: new RaisedButton(
@@ -139,7 +183,6 @@ initState() {
                               color: Colors.white
                           ),
                         ),
-
                         onPressed: () {
                             if (validateUserProfile()) {
                                 saveUserChanges();
@@ -151,9 +194,31 @@ initState() {
                   ],
                 ),
         ],
-          ),  
+          ),
       ),
       ),
+    );
+  }
+
+  List gender = ["Male", "Female"];
+  String select;
+  Row addRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor:Colors.lightBlueAccent,
+          value: gender[btnValue],
+          groupValue: select,
+          onChanged: (value) {
+            setState(() {
+              print(value);
+              select = value;
+            });
+          },
+        ),
+        Text(title)
+      ],
     );
   }
 
@@ -163,6 +228,8 @@ initState() {
     data.email = taskEmailInputController.text.trim();
     data.age = int.parse(taskAgeInputController.text);
     data.phone = int.parse(taskPhoneInputController.text);
+    data.location = taskLocationInputController.text.trim();
+    data.pincode = int.parse(taskPincodeInputController.text.trim());
     return data;
   }
  

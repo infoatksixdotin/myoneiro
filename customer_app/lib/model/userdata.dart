@@ -8,14 +8,18 @@ class UserData {
   int phone;
   String email;
   int age;
+  String location;
+  int pincode;
 
-  UserData( {this.id, this.name, this.phone, this.email, this.age });
+  UserData( {this.id, this.name, this.phone, this.email, this.age, this.location, this.pincode });
   UserData.fromJson(Map<String, dynamic> json) {
     id = json['id'] as String;
     name = json['name'] as String;
     phone = json['phone'] as int;
     email = json['email']as String;
     age = json['age']as int;
+    location = json ['location'] as String;
+    pincode = json ['pincode'] as int;
   }
 
   Map<String, dynamic> toJson() {
@@ -25,6 +29,8 @@ class UserData {
     data['phone'] = this.phone;
     data['email'] = this.email;
     data['age'] = this.age;
+    data['location'] = this.location;
+    data['pincode'] = this.pincode;
     return data;
   }
 
@@ -42,6 +48,13 @@ String validateUser() {
     if (this.age < 18) {
         errMsg += "Invalid age, should be on or above 18\n";
     }
+    if (!MiscUtil.validateLocation(this.location)) {
+      errMsg += "Invalid Location\n";
+    }
+    if (!MiscUtil.validatePincode(this.pincode)) {
+      errMsg += "Invalid Pincode\n";
+    }
+
     return errMsg;
 }
 

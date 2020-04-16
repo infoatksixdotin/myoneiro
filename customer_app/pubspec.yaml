@@ -33,7 +33,7 @@ dependencies:
   paytm: ^1.0.0
   flutter_ticket_widget: ^0.0.1
   flutter_share_me: ^0.9.1
-
+  pull_to_refresh: ^1.5.8
 
 
 dev_dependencies:

@@ -18,25 +18,35 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController taskPhoneInputController;
   TextEditingController taskEmailInputController;
   TextEditingController taskAgeInputController;
+  TextEditingController taskLocationInputController;
+  TextEditingController taskPincodeInputController;
+
 @override
 initState() {
   taskNameInputController = new TextEditingController();
-  taskNameInputController.text = "First Name Last Name";
+  taskNameInputController.text = "Full Name";
   taskPhoneInputController = new TextEditingController();
   taskPhoneInputController.text = "1234567890";
   taskEmailInputController = new TextEditingController();
-  taskEmailInputController.text =  "firsname@gmail.com";
+  taskEmailInputController.text =  "firstname@gmail.com";
   taskAgeInputController = new TextEditingController();
   taskAgeInputController.text = "21";
+  taskLocationInputController = new TextEditingController();
+  taskLocationInputController.text = "Bangalore";
+  taskPincodeInputController = new TextEditingController();
+  taskPincodeInputController.text = "560037";
+
   super.initState();
 }
 
   @override
   Widget build(BuildContext context) {
-     final String tmpPhone = ModalRoute.of(context).settings.arguments;
-     taskPhoneInputController.text = tmpPhone;
-    return new Scaffold(
-      appBar: new AppBar(
+
+  final String tmpPhone = ModalRoute.of(context).settings.arguments;
+  taskPhoneInputController.text = tmpPhone;
+
+  return new Scaffold(
+    appBar: new AppBar(
         title: new Text(
           "Register", style: TextStyle(color: AppTheme.whiteColor,),),
         backgroundColor: AppTheme.lightBlueAccent,
@@ -56,118 +66,165 @@ initState() {
         leading: new Container(),
       ),
       backgroundColor: AppTheme.whiteColor,
-      body: SingleChildScrollView(
-    child:  Container(
-          padding: new EdgeInsets.all(20.0),
-          child: Column(
-      children: <Widget>[
-              new Container(
-                   padding: new EdgeInsets.all(0.0),
-                    child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[ CircleAvatar(
-                  radius: 80.0,
-                  backgroundColor: Colors.black,
-                  backgroundImage: AssetImage('assets/logo/images.jpg'),
-                  //test-image.png
+    body: SingleChildScrollView(
+      child: Container (
+        padding: new EdgeInsets.all( 20.0 ) ,
+        child: Column (
+          children: <Widget>[
+            new Container(
+                padding: new EdgeInsets.all( 0.0 ) ,
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.center ,
+                  children: <Widget>[ CircleAvatar (
+                    radius: 70.0 ,
+                    backgroundColor: Colors.black ,
+                    backgroundImage: AssetImage ( 'assets/logo/images.jpg' ) ,
+                   ) ,
+                  ] ,
+                )
+            ) ,
+            new Container(
+              padding: const EdgeInsets.only( top: 5.0 ),
+              child: new TextFormField(
+                keyboardType: TextInputType.text,
+                decoration: new InputDecoration(
+                  hintText: ' Name',
+                  labelText: 'Name',
+                  icon: new Icon(
+                    Icons.person, color: AppTheme.lightBlueAccent, ),
                 ),
-
-                      ],
-                    )
+                controller: taskNameInputController,
+              ),
+            ),
+            new Container(
+              padding: const EdgeInsets.only( top: 5.0 ),
+              child: new TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: new InputDecoration(
+                  hintText: ' Phone Number',
+                  labelText: 'Phone Number',
+                  icon: new Icon(
+                    Icons.call, color: AppTheme.lightBlueAccent, ),
                 ),
-       new Container(
-                    padding: const EdgeInsets.only(top: 5.0),
-                   // child: Expanded(
-                         child: new TextFormField(
-                          keyboardType: TextInputType.text,
-                          decoration: new InputDecoration(
-                            hintText: ' Name',
-                            labelText: 'Name',                
-                            icon: new Icon(
-                              Icons.person, color: AppTheme.lightBlueAccent,),
-                          ),
-                          controller: taskNameInputController,
-                      ),
-                  // )
+                controller: taskPhoneInputController,
+              ),
+            ),
+            new Container(
+              padding: const EdgeInsets.only( top: 5.0 ),
+              child: new TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: new InputDecoration(
+                    hintText: 'you@example.com',
+                    labelText: 'E-mail Address',
+                    icon: new Icon(
+                      Icons.email, color: AppTheme.lightBlueAccent, )
                 ),
+                controller: taskEmailInputController,
+              ),
+            ),
+            new Container(
+              padding: const EdgeInsets.only( top: 5.0 ),
+              // child: Expanded(
+              child: new TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: new InputDecoration(
+                  hintText: 'Age',
+                  labelText: 'Age',
+                  icon: new Icon(
+                    Icons.add, color: AppTheme.lightBlueAccent, ),
+                ),
+                controller: taskAgeInputController,
+              ),
+              // )
+            ),
+            new Container(
+              padding: const EdgeInsets.only( top: 5.0 ),
+              child: new TextFormField(
+                keyboardType: TextInputType.text,
+                decoration: new InputDecoration(
+                  hintText: 'Location',
+                  labelText: 'Location',
+                  icon: new Icon(
+                    Icons.location_city, color: AppTheme.lightBlueAccent, ),
+                ),
+                controller: taskLocationInputController,
+              ),
+            ),
+            new Container(
+              padding: const EdgeInsets.only( top: 5.0 ),
+              child: new TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: new InputDecoration(
+                  hintText: 'Pincode',
+                  labelText: 'Pincode',
+                  icon: new Icon(
+                    Icons.edit_location, color: AppTheme.lightBlueAccent, ),
+                ),
+                controller: taskPincodeInputController,
+              ),
+            ),
+            Row (
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text ( 'Gender', style: TextStyle ( color: Colors.lightBlueAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15 ) ),
+                addRadioButton ( 0, 'Male' ),
+                addRadioButton ( 1, 'Female' ),
+              ],
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
                 new Container(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    //child: Expanded(
-                        child: new TextFormField(
-                        keyboardType: TextInputType.phone,
-                        decoration: new InputDecoration(
-                          hintText: ' Phone Number',
-                          labelText: 'Phone Number',
-                          icon: new Icon(
-                            Icons.call, color: AppTheme.lightBlueAccent,),
-                        ),
-                        controller: taskPhoneInputController,
-                      ),
-                  // )
-                ),
-                new Container(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    //child: Expanded(
-                          child: new TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          // Use email input type for emails.
-                          decoration: new InputDecoration(
-                              hintText: 'you@example.com',
-                              labelText: 'E-mail Address',
-                              icon: new Icon(
-                                Icons.email, color: AppTheme.lightBlueAccent,)
-                                ),
-                                controller: taskEmailInputController,
-                      ),     
-                   // )
-                ),
-                new Container(
-                    padding: const EdgeInsets.only(top: 5.0),
-                   // child: Expanded(
-                                          child: new TextFormField(
-                          keyboardType: TextInputType.phone,
-                          decoration: new InputDecoration(
-                            hintText: 'Age',
-                            labelText: 'Age',
-                            icon: new Icon(
-                              Icons.add, color: AppTheme.lightBlueAccent,),
-                          ),
-                          controller: taskAgeInputController,
-                      ),
-                   // )
-                ),
-           new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                      height: 50.0,
-                      width: 210.0,
-                      margin: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 40.0),
-                      child: new RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        child: new Text(
-                          'Register',
-                          style: new TextStyle(
-                              color: Colors.white
-                          ),
-                        ),
-
-                        onPressed: () {
-                          validateUserProfile();
-                        },
-                        color: AppTheme.lightBlueAccent,
+                  height: 50.0,
+                  width: 210.0,
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 40.0, vertical: 40.0 ),
+                  child: new RaisedButton(
+                    shape: RoundedRectangleBorder (
+                      borderRadius: BorderRadius.circular ( 50.0 ),
+                    ),
+                    child: new Text(
+                      'Register',
+                      style: new TextStyle(
+                          color: Colors.white
                       ),
                     ),
-                  ],
+                    onPressed: () {
+                      validateUserProfile ();
+                    },
+                    color: AppTheme.lightBlueAccent,
+                  ),
                 ),
-        ],
-          ),  
-         
+              ],
+            ),
+          ],
+        ),
       ),
-      
-      ),
+    ),
+  );
+  }
+
+  List gender = ["Male", "Female"];
+  String select;
+  Row addRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor:Colors.lightBlueAccent,
+          value: gender[btnValue],
+          groupValue: select,
+          onChanged: (value) {
+            setState(() {
+              print(value);
+              select = value;
+            });
+          },
+        ),
+        Text(title)
+      ],
     );
   }
 
@@ -177,6 +234,8 @@ UserData uiToUserData() {
     data.email = taskEmailInputController.text.trim();
     data.age = int.parse(taskAgeInputController.text.trim());
     data.phone = int.parse(taskPhoneInputController.text.trim());
+    data.location = taskLocationInputController.text.trim();
+    data.pincode = int.parse(taskPincodeInputController.text.trim());
     return data;
   }
  

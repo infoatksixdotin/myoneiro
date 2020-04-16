@@ -49,7 +49,7 @@ _pickDate() async {
           dropdownLValue = newValue;
         });
       },
-      items: <String>['Bangalore-Jakkur']
+      items: <String>['Bangalore-Jakkur','Bangalore-2']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
