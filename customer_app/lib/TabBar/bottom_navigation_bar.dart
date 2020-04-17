@@ -61,10 +61,10 @@ class BottomNavBarState extends State<BottomNavBar> with SingleTickerProviderSta
               icon: Icon(Icons.list),
             ),
             Tab(
-              icon: Icon(Icons.headset),
+              icon: Icon(Icons.headset_mic),
             ),
              Tab(
-              icon: Icon(Icons.person_pin),
+              icon: Icon(Icons.account_circle),
             ),
           ],
           // setup the controller

@@ -19,7 +19,7 @@ var height, width;
     width = MediaQuery.of(context).size.width;
     return Scaffold (
         appBar: new AppBar(
-          title: new Text( 'Aircraft Info '),
+          title: new Text( 'Aircraft Details '),
           backgroundColor: AppTheme.lightBlueAccent,
           centerTitle: true,
           shape: RoundedRectangleBorder (
@@ -42,20 +42,21 @@ var height, width;
               color: Colors.white),
         ),
         Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
               Container(
-                height: 180,
-                width: 180,
+                height: 150,
+                width: 150,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                     image: DecorationImage(
-                        image: ExactAssetImage('assets/logo/images.jpg'),
+                        image: ExactAssetImage('assets/aircrafts/mehta.jpg'),
                         fit: BoxFit.cover)),
               ),
               Container(
                 height: 400,
+                width: 900,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                   child: Column(
@@ -66,40 +67,21 @@ var height, width;
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Container(
-                            width: 200,
-                            child: Text('Aircraft Name', style: TextStyle( color: Colors.black, fontSize: 24), textAlign: TextAlign.left,
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              SizedBox(height: 4),
-                              Text('Rs : 2000', style:
-                              TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.black),
-                                textAlign: TextAlign.right,
-                              ),
-                              SizedBox(height: 12),
-                              Text(
-                                "Aircraft Experience: ",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.right,
-                              )
-                            ],
+                          Text('Micro Light Aircraft (M3)', style: TextStyle( color: Colors.black,fontWeight: FontWeight.bold, fontSize: 24), textAlign: TextAlign.left,
                           ),
                         ],
                       ),
+                      SizedBox(height: 10,),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: Text('Aircraft Operator',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text('Aircraft Model: ',
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(bottom: 16, top: 8),
-                          child: Text('Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft DescriptionAircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description Aircraft Description',
-                              style: TextStyle(color: Colors.black)),
+                          padding: const EdgeInsets.only(bottom: 0, top: 8),
+                          child: Text('This is lightweight, 1- or 2-seat fixed-wing aircraft.In 1999 we ventured into manufacturing of Micro-light Aircrafts with a license from Zenith Air to manufacturing their Micro-light Aircrafts CH701 and CH601 approved by DGCA. A successful endeavor, giving us an experience of manufacture, sales and services of over one hundred aircrafts to various government sectors and private owners. We are the official representative of ZENAIR in India.',
+                              style: TextStyle(color: Colors.black,fontSize: 18)),
                         ),
                       ),
                     ],

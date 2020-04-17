@@ -90,24 +90,38 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                                 leading: CircleAvatar ( radius: 35.0,
                                   backgroundImage: AssetImage ( 'assets/aircrafts/mehta.jpg' ), ),
                                 // no matter how big it is, it won't overflow
-                                title: Row(
-                                  children: <Widget>[
-                                    Text( snapshot.data.documents[index]['title'] ,
-                                      style: TextStyle ( color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15 ) ),
-                                    SizedBox(width: 10,),
-                                    Text( 'Rs: ' + snapshot.data.documents[index]['price'].toString ( ),
+                                title: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text( snapshot.data.documents[index]['title'] ,
                                         style: TextStyle ( color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15 ) ),
-                                    ]
+                                      ]
+                                  ),
                                 ),
-                                subtitle: new Text( "Slots Available: " +
-                                    snapshot.data.documents[index]['slots']
-                                        .toString ( ),
-                                    style: TextStyle (
-                                        color: Colors.black, fontSize: 15 ) ),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text( snapshot.data.documents[index]['slots']
+                                          .toString ( ) +"  Slots Available" ,
+                                      style: TextStyle (
+                                          color: Colors.black, fontSize: 15, ) ),
+                                      SizedBox(height: 5,),
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(Icons.local_offer,color: Colors.lightBlueAccent,),
+                                          Text('20%'),
+                                          SizedBox(width: 150,),
+                                          Text( 'Rs: ' + snapshot.data.documents[index]['price'].toString ( ),
+                                              style: TextStyle ( color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15 ) ),
+                                ],
+                                    )
+                                 ]
+                                ),
                               ),
                             ),
                             ButtonBar (

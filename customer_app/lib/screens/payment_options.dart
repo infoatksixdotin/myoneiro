@@ -10,9 +10,10 @@ class PaymentOptions extends StatefulWidget {
   @override
   _PaymentOptionsState createState() => _PaymentOptionsState();
 }
-enum SingingCharacter { Paytm, GooglePay }
+enum SingingCharacter { Paytm, GooglePay, COD }
 
 class _PaymentOptionsState extends State<PaymentOptions> {
+
   SingingCharacter _character = SingingCharacter.Paytm;
   String payment_response = '';
 
@@ -66,6 +67,18 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                         },
                       ),
                     ),
+                    ListTile(
+                      title: const Text('COD'),
+                      leading: Radio(
+                        value: SingingCharacter.COD,
+                        groupValue: _character,
+                        onChanged: (SingingCharacter value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
                   SizedBox(height: 50),
                   new Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -82,7 +95,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                           child: new Text('Pay', style: new TextStyle(color: Colors.white),),
                             onPressed: ()
                             {
-                            generateCheckSum();
+                              Navigator.pushNamed(context, '/TicketScreen');
                            }
                         ),
                       ),
