@@ -185,10 +185,12 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                               onChanged: _setAgreedToTOS,
                               activeColor: Colors.lightBlueAccent,
                             ),
-                            GestureDetector(
-                              onTap: () => _setAgreedToTOS(!_agreedToTOS),
-                              child: const Text(
-                                'I agree to the Terms of Services and Privacy Policy',
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () => _setAgreedToTOS(!_agreedToTOS),
+                                child: Text(
+                                  'I agree to the Terms of Services and Privacy Policy',
+                                ),
                               ),
                             ),
                           ],

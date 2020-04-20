@@ -44,9 +44,14 @@ class _bookedscreenState extends State<bookedscreen> {
                               leading: Column(
                                 children: <Widget>[
                                Expanded(
-                                 child: CircleAvatar(
-                                   radius: 30.0,
-                                   backgroundImage: AssetImage(mydata[index]['imageurl']),),
+                                 child: GestureDetector(
+                                   onTap: () {
+                                     Navigator.pushNamed ( context, '/aircraft_detail' );
+                                   },
+                                   child: CircleAvatar(
+                                     radius: 30.0,
+                                     backgroundImage: AssetImage(mydata[index]['imageurl']),),
+                                 ),
                                ),
                                   Text( mydata[index]['group'],
                                       style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),

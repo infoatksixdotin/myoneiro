@@ -144,20 +144,22 @@ class RadioItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         SizedBox(height: 30,),
-        new Container(
-          height: 55.0,
-          width: 55.0,
-          decoration: new BoxDecoration(
-            color: !_item.booked ? Colors.lightBlueAccent : Colors.pink,
-            border: new Border.all(width: 2.0, color: Colors.black),
-            borderRadius: const BorderRadius.all(const Radius.circular(5.0)),
-          ),
-          child: Column(
-            children:<Widget>[
-            SizedBox(height: 10,),
-             _item.isSelected ? Icon(Icons.done,color: Colors.white,size: 35,): Icon(Icons.airline_seat_recline_normal,color: Colors.white,size: 25,),
-              Expanded(child: new Text(_item.booked ?"Booked" : "", style: TextStyle(color: AppTheme.whiteColor))),
-            ],
+        Expanded(
+          flex: 1,
+          child: new Container(
+            height: 55.0,
+            width: 55.0,
+            decoration: new BoxDecoration(
+              color: !_item.booked ? Colors.lightBlueAccent : Colors.pink,
+              border: new Border.all(width: 2.0, color: Colors.black),
+              borderRadius: const BorderRadius.all(const Radius.circular(5.0)),
+            ),
+            child: Column(
+              children:<Widget>[
+               _item.isSelected ? Icon(Icons.done,color: Colors.white,size: 35,): Icon(Icons.airline_seat_recline_normal,color: Colors.white,size: 25,),
+                Expanded(child: new Text(_item.booked ?"Booked" : "", style: TextStyle(color: AppTheme.whiteColor))),
+              ],
+            ),
           ),
         ),
         new Text(_item.text, style: TextStyle(color: AppTheme.BlackColor)),

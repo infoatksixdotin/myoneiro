@@ -12,7 +12,7 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
   Size deviceSize;
 
   bool checkboxFilter = false;
-  List<String> allFilter = ['Operators', 'Slot Availability', 'Aircraft Popularity'];
+  List<String> allFilter = ['Cost', 'Agni (Service Provider-1)', 'Mehta (Service Provider-2)', 'Micro Light (Model-1)', 'Ultra Light (Model-2)'];
   List<String> selectedFilter = [];
 
   RefreshController _refreshController = RefreshController(initialRefresh: true);
@@ -108,18 +108,17 @@ class _AvailAircraftsState extends State<AvailAircrafts> {
                                           .toString ( ) +"  Slots Available" ,
                                       style: TextStyle (
                                           color: Colors.black, fontSize: 15, ) ),
-                                      SizedBox(height: 5,),
                                       Row(
-                                        children: <Widget>[
-                                          Icon(Icons.local_offer,color: Colors.lightBlueAccent,),
-                                          Text('20%'),
-                                          SizedBox(width: 150,),
-                                          Text( 'Rs: ' + snapshot.data.documents[index]['price'].toString ( ),
+                                          children: <Widget>[
+                                            Icon(Icons.local_offer,color: Colors.lightBlueAccent,),
+                                            Expanded(child: Text('20%')),
+                                            Text( 'Rs: ' + snapshot.data.documents[index]['price'].toString ( ),
                                               style: TextStyle ( color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15 ) ),
-                                ],
-                                    )
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15 ) ),
+
+                                        ],
+                                      )
                                  ]
                                 ),
                               ),
@@ -193,7 +192,7 @@ class _MyDialogState extends State<_MyDialog> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 90),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
       child: Dialog(
         shape: RoundedRectangleBorder(borderRadius:
         BorderRadius.all(Radius.circular(15),),),
@@ -203,7 +202,9 @@ class _MyDialogState extends State<_MyDialog> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text( 'Filter Aircraft', style: TextStyle(fontSize: 23.0, color: Colors.lightBlueAccent,fontWeight: FontWeight.bold,), textAlign: TextAlign.center, ),
+                Text( 'Filter Aircraft',
+                  style: TextStyle(fontSize: 23.0, color: Colors.lightBlueAccent,fontWeight: FontWeight.bold,),
+                  textAlign: TextAlign.center, ),
               ],
             ),
             Expanded(
