@@ -4,6 +4,8 @@ import 'package:flutter_app1/model/userdata.dart';
 import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class Profile extends StatefulWidget {
   @override
@@ -11,7 +13,22 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  //image upload
+  File imageURI;
+  Future getImageFromCamera() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      imageURI = image;
 
+    });
+  }
+  Future getImageFromGallery() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageURI = image;
+    });
+  }
+// firebase database
   final databaseReference = Firestore.instance;
   TextEditingController taskNameInputController;
   TextEditingController taskPhoneInputController;
@@ -28,7 +45,6 @@ initState() {
   taskAgeInputController = new TextEditingController();
   taskLocationInputController = new TextEditingController();
   taskPincodeInputController = new TextEditingController();
-
   super.initState();
 
   UserData user = UserData.getUser();
@@ -68,141 +84,167 @@ initState() {
         ),
         backgroundColor: AppTheme.ScaffoldBackgroundColor,
         drawer:DrawerMenu.getMenu(context),
-        body: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-          children: <Widget>[
-                    new Container(
-                         padding: new EdgeInsets.all(0.0),
-                          child: new Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[ CircleAvatar(
-                        radius: 60.0,
-                        backgroundColor: Colors.black,
-                        backgroundImage: AssetImage('assets/logo/images.jpg'),
-                        //test-image.png
-                      ),
-
-                            ],
-                          )
-                      ),
-           new Container(
-                               child: new TextFormField(
-                                keyboardType: TextInputType.text,
-                                decoration: new InputDecoration(
-                                  hintText: ' Name',
-                                  labelText: 'Name',
-                                  icon: new Icon(
-                                    Icons.person, color: AppTheme.lightBlueAccent,),
-                                ),
-                                controller: taskNameInputController,
-                            ),
-                      ),
+        body: SingleChildScrollView(
+          child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: <Widget>[
                       new Container(
-                              child: new TextFormField(
-                              keyboardType: TextInputType.phone,
-                              readOnly: true,
-                              decoration: new InputDecoration(
-                                hintText: ' Phone Number',
-                                labelText: 'Phone Number',
-                                icon: new Icon(
-                                  Icons.call, color: AppTheme.lightBlueAccent,),
-                              ),
-                              controller: taskPhoneInputController,
-                            ),
-                      ),
-                      new Container(
+                           padding: new EdgeInsets.all(0.0),
+                            child: new Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                imageURI == null
+                                  ? CircleAvatar(radius: 60.0,
+                                     backgroundColor: Colors.black,)
+                                  : CircleAvatar(
+                                    radius: 60.0,
+                                    backgroundColor: Colors.black,
+                                    child: Image.file( imageURI, width: 300, height: 200, fit: BoxFit.cover)),
+                                GestureDetector(
+                                    child: new Icon( Icons.edit, color: AppTheme.lightBlueAccent,),
+                                    onTap: (){
+                                      setState(() {
+                                        imageURI;
+                                      });
+                                      return showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Theme(
+                                         data: Theme.of(context).copyWith(dialogBackgroundColor: AppTheme.whiteColor),
+                                           child: AlertDialog(
+                                              shape: RoundedRectangleBorder(borderRadius:
+                                              BorderRadius.all(Radius.circular(15),),),
+                                                title: new Text('Choose Image',textAlign: TextAlign.center,
+                                                style: TextStyle(color: Colors.black)),
+                                            actions: <Widget>[
+                                             ButtonBar(
+                                                alignment: MainAxisAlignment.start,
+                                                buttonHeight: 30, buttonMinWidth: 100,
+                                                buttonPadding: EdgeInsets.all(18),
+                                                    children:<Widget>[
+                                                      new RaisedButton(
+                                                        shape: RoundedRectangleBorder(borderRadius:
+                                                        BorderRadius.all(Radius.circular(15),),),
+                                                        child: new Text('Camera',style: TextStyle(color: AppTheme.whiteColor)),
+                                                        onPressed: () {
+                                                        getImageFromCamera();
+                                                        Navigator.pop(context);
+                                                        },
+                                                        color: Colors.lightBlueAccent,
+                                                        ),
+                                                      new RaisedButton(
+                                                        shape: RoundedRectangleBorder(borderRadius:
+                                                         BorderRadius.all(Radius.circular(15),),),
+                                                        child: new Text('Gallery',style: TextStyle(color: AppTheme.whiteColor)),
+                                                        onPressed: () {
+                                                         getImageFromGallery();
+                                                         Navigator.pop(context);
+                                                      },
+                                                         color: Colors.lightBlueAccent,
+                                                      ),
+                                                    ],
+                                                  )
+                                                 ],
+                                               )
+                                            );
+                                         },
+                                      );
+                                      },
+                                 ),
+                              ],
+                            )
+                        ),
+                        new Container(
+                            child: new TextFormField(
+                             keyboardType: TextInputType.text,
+                             decoration: new InputDecoration(
+                               hintText: ' Name',
+                               labelText: 'Name',
+                               icon: new Icon(
+                                 Icons.person, color: AppTheme.lightBlueAccent,),
+                             ),
+                             controller: taskNameInputController,
+                         ),
+                          ),
+                        new Container(
                                 child: new TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                // Use email input type for emails.
+                                keyboardType: TextInputType.phone,
+                                readOnly: true,
                                 decoration: new InputDecoration(
-                                    hintText: 'you@example.com',
-                                    labelText: 'E-mail Address',
+                                  hintText: ' Phone Number',
+                                  labelText: 'Phone Number',
+                                  icon: new Icon(
+                                    Icons.call, color: AppTheme.lightBlueAccent,),
+                                ),
+                                controller: taskPhoneInputController,
+                              ),
+                        ),
+                        new Container(
+                                  child: new TextFormField(
+                                  keyboardType: TextInputType.emailAddress,
+                                  // Use email input type for emails.
+                                  decoration: new InputDecoration(
+                                      hintText: 'you@example.com',
+                                      labelText: 'E-mail Address',
+                                      icon: new Icon(
+                                        Icons.email, color: AppTheme.lightBlueAccent,)
+                                        ),
+                                        controller: taskEmailInputController,
+                              ),
+                        ),
+                        new Container(
+                          child: new TextFormField(
+                                  keyboardType: TextInputType.phone,
+                                  decoration: new InputDecoration(
+                                    hintText: 'Age',
+                                    labelText: 'Age',
                                     icon: new Icon(
-                                      Icons.email, color: AppTheme.lightBlueAccent,)
-                                      ),
-                                      controller: taskEmailInputController,
+                                      Icons.add, color: AppTheme.lightBlueAccent,),
+                                  ),
+                                  controller: taskAgeInputController,
+                              ),
+                        ),
+                      new Container(
+                          child: new TextFormField(
+                            keyboardType: TextInputType.text,
+                            decoration: new InputDecoration(
+                              hintText: 'Location',
+                              labelText: 'Location',
+                              icon: new Icon(
+                                Icons.location_city, color: AppTheme.lightBlueAccent, ),
                             ),
+                            controller: taskLocationInputController,
+                          ),
                       ),
                       new Container(
-                        child: new TextFormField(
-                                keyboardType: TextInputType.phone,
-                                decoration: new InputDecoration(
-                                  hintText: 'Age',
-                                  labelText: 'Age',
-                                  icon: new Icon(
-                                    Icons.add, color: AppTheme.lightBlueAccent,),
-                                ),
-                                controller: taskAgeInputController,
+                          child: new TextFormField(
+                            keyboardType: TextInputType.phone,
+                            decoration: new InputDecoration(
+                              hintText: 'Pincode',
+                              labelText: 'Pincode',
+                              icon: new Icon(
+                                Icons.edit_location, color: AppTheme.lightBlueAccent, ),
                             ),
+                            controller: taskPincodeInputController,
+                          ),
                       ),
-            new Container(
-                child: new TextFormField(
-                  keyboardType: TextInputType.text,
-                  decoration: new InputDecoration(
-                    hintText: 'Location',
-                    labelText: 'Location',
-                    icon: new Icon(
-                      Icons.location_city, color: AppTheme.lightBlueAccent, ),
+                      Row (
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text ( 'Gender', style: TextStyle ( color: Colors.lightBlueAccent,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15 ) ),
+                            addRadioButton ( 0, 'Male' ),
+                            addRadioButton ( 1, 'Female' ),
+                          ],
+                      ),
+                    ],
                   ),
-                  controller: taskLocationInputController,
                 ),
             ),
-            new Container(
-                child: new TextFormField(
-                  keyboardType: TextInputType.phone,
-                  decoration: new InputDecoration(
-                    hintText: 'Pincode',
-                    labelText: 'Pincode',
-                    icon: new Icon(
-                      Icons.edit_location, color: AppTheme.lightBlueAccent, ),
-                  ),
-                  controller: taskPincodeInputController,
-                ),
-            ),
-            Row (
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text ( 'Gender', style: TextStyle ( color: Colors.lightBlueAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15 ) ),
-                  addRadioButton ( 0, 'Male' ),
-                  addRadioButton ( 1, 'Female' ),
-                ],
-            ),
-//             new Row(
-//                    mainAxisAlignment: MainAxisAlignment.center,
-//                    children: <Widget>[
-//                      new Container(
-//                        height: 50.0,
-//                        width: 130.0,
-//                        margin: const EdgeInsets.symmetric(
-//                            horizontal: 40.0, vertical: 40.0),
-//                        child: new RaisedButton(
-//                          shape: RoundedRectangleBorder(
-//                            borderRadius: BorderRadius.circular(50.0),
-//                          ),
-//                          child: new Text(
-//                            'Save',
-//                            style: new TextStyle(
-//                                color: Colors.white
-//                            ),
-//                          ),
-//                          onPressed: () {
-//                              if (validateUserProfile()) {
-//                                  saveUserChanges();
-//                              }
-//                          },
-//                          color: AppTheme.lightBlueAccent,
-//                        ),
-//                      ),
-//                    ],
-//                  ),
-            ],
-                ),
-              ),
-          ),
+        ),
       ),
     );
   }
@@ -258,6 +300,5 @@ initState() {
       else {
         showAlert(context, "Success", "Your profile updated..!");
       }
-
   }
 }

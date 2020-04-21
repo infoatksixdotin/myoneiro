@@ -5,6 +5,8 @@ import 'package:flutter_app1/screens/alertdialog.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app1/utils/otputil.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -12,6 +14,20 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  File imageURI;
+  Future getImageFromCamera() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      imageURI = image;
+
+    });
+  }
+  Future getImageFromGallery() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageURI = image;
+    });
+  }
 
   final databaseReference = Firestore.instance;
   TextEditingController taskNameInputController;
@@ -72,18 +88,64 @@ initState() {
           padding: new EdgeInsets.all( 20.0 ) ,
           child: Column (
             children: <Widget>[
-              new Container(
-                  padding: new EdgeInsets.all( 0.0 ) ,
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.center ,
-                    children: <Widget>[ CircleAvatar (
-                      radius: 70.0 ,
-                      backgroundColor: Colors.black ,
-                      backgroundImage: AssetImage ( 'assets/logo/images.jpg' ) ,
-                     ) ,
-                    ] ,
-                  )
-              ) ,
+              imageURI == null
+                  ? CircleAvatar(radius: 60.0,
+                backgroundColor: Colors.black,)
+                  : CircleAvatar(
+                  radius: 60.0,
+                  backgroundColor: Colors.black,
+                  child: Image.file( imageURI, width: 300, height: 200, fit: BoxFit.cover)),
+              GestureDetector(
+                child: new Icon( Icons.edit, color: AppTheme.lightBlueAccent,),
+                onTap: (){
+                  setState(() {
+                    imageURI;
+                  });
+                  return showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Theme(
+                          data: Theme.of(context).copyWith(dialogBackgroundColor: AppTheme.whiteColor),
+                          child: AlertDialog(
+                            shape: RoundedRectangleBorder(borderRadius:
+                            BorderRadius.all(Radius.circular(15),),),
+                            title: new Text('Choose Image',textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.black)),
+                            actions: <Widget>[
+                              ButtonBar(
+                                alignment: MainAxisAlignment.start,
+                                buttonHeight: 30, buttonMinWidth: 100,
+                                buttonPadding: EdgeInsets.all(18),
+                                children:<Widget>[
+                                  new RaisedButton(
+                                    shape: RoundedRectangleBorder(borderRadius:
+                                    BorderRadius.all(Radius.circular(15),),),
+                                    child: new Text('Camera',style: TextStyle(color: AppTheme.whiteColor)),
+                                    onPressed: () {
+                                      getImageFromCamera();
+                                      Navigator.pop(context);
+                                    },
+                                    color: Colors.lightBlueAccent,
+                                  ),
+                                  new RaisedButton(
+                                    shape: RoundedRectangleBorder(borderRadius:
+                                    BorderRadius.all(Radius.circular(15),),),
+                                    child: new Text('Gallery',style: TextStyle(color: AppTheme.whiteColor)),
+                                    onPressed: () {
+                                      getImageFromGallery();
+                                      Navigator.pop(context);
+                                    },
+                                    color: Colors.lightBlueAccent,
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                      );
+                    },
+                  );
+                },
+              ),
               new Container(
                 padding: const EdgeInsets.only( top: 5.0 ),
                 child: new TextFormField(
