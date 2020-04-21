@@ -23,88 +23,90 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   }
 
   Widget build(BuildContext context) {
-    return new Scaffold(
-       appBar: new AppBar(
-        title: new Text(
-          "Select Payment Mode", style: TextStyle(color: AppTheme.whiteColor,),),
-        backgroundColor: AppTheme.lightBlueAccent,
-        iconTheme: new IconThemeData(color: AppTheme.whiteColor),
-        centerTitle: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
+    return SafeArea(
+      child: new Scaffold(
+         appBar: new AppBar(
+          title: new Text(
+            "Select Payment Mode", style: TextStyle(color: AppTheme.whiteColor,),),
+          backgroundColor: AppTheme.lightBlueAccent,
+          iconTheme: new IconThemeData(color: AppTheme.whiteColor),
+          centerTitle: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(90.0),
-              child: Column(              
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                  ListTile(
-                    title: const Text('Paytm'),
-                    leading: Radio(
-                    value: SingingCharacter.Paytm,
-                    groupValue: _character,
-                    onChanged: (SingingCharacter value) {
-                      setState(() {
-                        _character = value;
-                        });
-                      },
-                    ),
-                  ),
-                    ListTile(
-                      title: const Text('Google Pay'),
-                      leading: Radio(
-                        value: SingingCharacter.GooglePay,
-                        groupValue: _character,
-                        onChanged: (SingingCharacter value) {
-                          setState(() {
-                            _character = value;
-                          });
-                        },
-                      ),
-                    ),
-                    ListTile(
-                      title: const Text('COD'),
-                      leading: Radio(
-                        value: SingingCharacter.COD,
-                        groupValue: _character,
-                        onChanged: (SingingCharacter value) {
-                          setState(() {
-                            _character = value;
-                          });
-                        },
-                      ),
-                    ),
-                  SizedBox(height: 50),
-                  new Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.end,
+        body: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(90.0),
+                child: Column(              
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Container(
-                        height:50.0, width: 170.0,
-                        margin: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 100.0),
-                        child: new RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                          color: AppTheme.lightBlueAccent,
-                          child: new Text('Pay', style: new TextStyle(color: Colors.white),),
-                            onPressed: ()
-                            {
-                              Navigator.pushNamed(context, '/TicketScreen');
-                           }
+                    ListTile(
+                      title: const Text('Paytm'),
+                      leading: Radio(
+                      value: SingingCharacter.Paytm,
+                      groupValue: _character,
+                      onChanged: (SingingCharacter value) {
+                        setState(() {
+                          _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                      ListTile(
+                        title: const Text('Google Pay'),
+                        leading: Radio(
+                          value: SingingCharacter.GooglePay,
+                          groupValue: _character,
+                          onChanged: (SingingCharacter value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
                         ),
                       ),
-                    ],
-                 )
-                ],
+                      ListTile(
+                        title: const Text('COD'),
+                        leading: Radio(
+                          value: SingingCharacter.COD,
+                          groupValue: _character,
+                          onChanged: (SingingCharacter value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
+                        ),
+                      ),
+                    SizedBox(height: 50),
+                    new Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        new Container(
+                          height:50.0, width: 170.0,
+                          margin: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 100.0),
+                          child: new RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                              ),
+                            color: AppTheme.lightBlueAccent,
+                            child: new Text('Pay', style: new TextStyle(color: Colors.white),),
+                              onPressed: ()
+                              {
+                                Navigator.pushNamed(context, '/TicketScreen');
+                             }
+                          ),
+                        ),
+                      ],
+                   )
+                  ],
+              ),
+              ),
             ),
-            ),
-          ),
+        ),
       ),
     );
   }

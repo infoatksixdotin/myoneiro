@@ -8,8 +8,10 @@ class LogoutScreen extends StatefulWidget {
 class _LogoutScreenState extends State<LogoutScreen>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+      child: Scaffold(
 
+      ),
     );
   }
 

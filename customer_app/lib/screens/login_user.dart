@@ -32,88 +32,90 @@ class _LoginAuthState extends State<LoginAuth> {
 
  @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(
-            "Login", style: TextStyle(color: AppTheme.whiteColor,),),
-          backgroundColor: AppTheme.lightBlueAccent,
-          iconTheme: new IconThemeData(color: AppTheme.lightBlueAccent),
-          centerTitle: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
+    return SafeArea(
+      child: new Scaffold(
+          appBar: new AppBar(
+            title: new Text(
+              "Login", style: TextStyle(color: AppTheme.whiteColor,),),
+            backgroundColor: AppTheme.lightBlueAccent,
+            iconTheme: new IconThemeData(color: AppTheme.lightBlueAccent),
+            centerTitle: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(30),
+              ),
             ),
+            leading: new Container(),
           ),
-          leading: new Container(),
-        ),
-      resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 40,),
-                Text('Welcome to MyOneiro!',style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold, fontSize: 30)),
-                SizedBox(height: 30,),
-                CircleAvatar(
-                  radius: 80.0,
-                  backgroundColor: Colors.black,
-                  backgroundImage: AssetImage('assets/logo/images.jpg'),
-                  //test-image.png
-                ),
-                SizedBox(height: 10,),
-                Padding(
-                  padding: EdgeInsets.all(50.0),
-                  child: Column(
-                    children: <Widget>[
-                       Container(
-                        child: Column(
-                          children: <Widget>[
-                            new Container(
-                             padding: const EdgeInsets.only(top: 10.0),
-                    //child: Expanded(
-                           child: new TextFormField(
-						               onChanged: (value) {
-                              this.phoneNo = value;
-                            },
-                            keyboardType: TextInputType.phone,
-                        decoration: new InputDecoration(
-                          hintText: ' Phone Number',
-                          labelText: 'Phone Number',
-                          icon: new Icon(
-                            Icons.call, color: AppTheme.lightBlueAccent,),
-                        ),
-                        controller: taskPhoneInputController,
-                      ),
-                  // )
-                          ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 30,),
-                       Container(
-                         height:50.0, width: 170.0,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                            child: Text('Login'),
-                            onPressed: (){
-                              //postTest(this.phoneNo);
-                              onLogin();
-                            },
-                            textColor: Colors.white,
-                            elevation: 7.0,
-                          color: AppTheme.lightBlueAccent,
-                        ),
-                         ),
-                    ],
+        resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 40,),
+                  Text('Welcome to MyOneiro!',style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold, fontSize: 30)),
+                  SizedBox(height: 30,),
+                  CircleAvatar(
+                    radius: 80.0,
+                    backgroundColor: Colors.black,
+                    backgroundImage: AssetImage('assets/logo/images.jpg'),
+                    //test-image.png
                   ),
-                )
-              ],
+                  SizedBox(height: 10,),
+                  Padding(
+                    padding: EdgeInsets.all(50.0),
+                    child: Column(
+                      children: <Widget>[
+                         Container(
+                          child: Column(
+                            children: <Widget>[
+                              new Container(
+                               padding: const EdgeInsets.only(top: 10.0),
+                      //child: Expanded(
+                             child: new TextFormField(
+						               onChanged: (value) {
+                                this.phoneNo = value;
+                              },
+                              keyboardType: TextInputType.phone,
+                          decoration: new InputDecoration(
+                            hintText: ' Phone Number',
+                            labelText: 'Phone Number',
+                            icon: new Icon(
+                              Icons.call, color: AppTheme.lightBlueAccent,),
+                          ),
+                          controller: taskPhoneInputController,
+                        ),
+                    // )
+                            ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 30,),
+                         Container(
+                           height:50.0, width: 170.0,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                              child: Text('Login'),
+                              onPressed: (){
+                                //postTest(this.phoneNo);
+                                onLogin();
+                              },
+                              textColor: Colors.white,
+                              elevation: 7.0,
+                            color: AppTheme.lightBlueAccent,
+                          ),
+                           ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        )
+          )
+      ),
     );
   }
   void onLogin() async {

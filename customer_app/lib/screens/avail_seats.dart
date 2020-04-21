@@ -36,99 +36,101 @@ class availSeatsState extends State<availSeats> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(
-            "Select Slot", style: TextStyle(color: AppTheme.whiteColor,),),
-          backgroundColor: AppTheme.lightBlueAccent,
-          iconTheme: new IconThemeData(color: AppTheme.whiteColor),
-          centerTitle: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
+    return SafeArea(
+      child: new Scaffold(
+          appBar: new AppBar(
+            title: new Text(
+              "Select Slot", style: TextStyle(color: AppTheme.whiteColor,),),
+            backgroundColor: AppTheme.lightBlueAccent,
+            iconTheme: new IconThemeData(color: AppTheme.whiteColor),
+            centerTitle: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(30),
+              ),
             ),
           ),
-        ),
-        body: CustomScrollView(slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Column(
-                children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Card(
-                  color: Colors.white10,
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  elevation: 0,margin: EdgeInsets.all(5),
-                  child: ListTile(
-                    leading: CircleAvatar(radius: 45.0,
-                      backgroundImage: AssetImage('assets/aircrafts/mehta.jpg'),), // no matter how big it is, it won't overflow
-                    title: Align(
-                      alignment: Alignment.topRight,
-                      child: new Text('10-April-2020',
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
-                    ),
-                    subtitle: Align(
-                      alignment: Alignment.topRight,
-                      child: new Text("Bangalore-Jakkur",
-                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 17)),
+          body: CustomScrollView(slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: Column(
+                  children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Card(
+                    color: Colors.white10,
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    elevation: 0,margin: EdgeInsets.all(5),
+                    child: ListTile(
+                      leading: CircleAvatar(radius: 45.0,
+                        backgroundImage: AssetImage('assets/aircrafts/mehta.jpg'),), // no matter how big it is, it won't overflow
+                      title: Align(
+                        alignment: Alignment.topRight,
+                        child: new Text('10-April-2020',
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
+                      ),
+                      subtitle: Align(
+                        alignment: Alignment.topRight,
+                        child: new Text("Bangalore-Jakkur",
+                            style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 17)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20,),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Text('Micro Light Aircraft (M1)',
-                  style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-              ),
-                  SizedBox(height: 20,),
-            ]
-          ),
-          ),
-           SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4),
-            delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-              return InkWell(
-                splashColor: Colors.lightBlueAccent,
-                onTap: () {
-                    setState(() {
-                     //timeData.forEach((element) => element.isSelected = false);
-                       timeData[index].isSelected = true;
-                    });
-                },
-                 child: new RadioItem(timeData[index],true),
-                 );
-            }, childCount: timeData.length + 0
+                SizedBox(height: 20,),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Text('Micro Light Aircraft (M1)',
+                    style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
+                ),
+                    SizedBox(height: 20,),
+              ]
             ),
-          ),
-             SliverFillRemaining(
-              hasScrollBody: false,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height:50.0, width: 300.0,
-                      child: RaisedButton(
-                        color: Colors.lightBlueAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Text('Book',style: new TextStyle(color: Colors.white),),
-                          onPressed: () {
-                            // need to add validation
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => PassengerDetails(),),);
-                       }
-                     ),
-                    ),
+            ),
+             SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4),
+              delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+                return InkWell(
+                  splashColor: Colors.lightBlueAccent,
+                  onTap: () {
+                      setState(() {
+                       //timeData.forEach((element) => element.isSelected = false);
+                         timeData[index].isSelected = true;
+                      });
+                  },
+                   child: new RadioItem(timeData[index],true),
+                   );
+              }, childCount: timeData.length + 0
+              ),
+            ),
+               SliverFillRemaining(
+                hasScrollBody: false,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height:50.0, width: 300.0,
+                        child: RaisedButton(
+                          color: Colors.lightBlueAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            child: Text('Book',style: new TextStyle(color: Colors.white),),
+                            onPressed: () {
+                              // need to add validation
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => PassengerDetails(),),);
+                         }
+                       ),
+                      ),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+      ),
     );
   }
 }

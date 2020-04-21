@@ -51,171 +51,173 @@ class _PassengerDetailsState extends State<PassengerDetails> {
 
 
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(
-          "Passenger Details...", style: TextStyle(color: AppTheme.whiteColor,),),
-        backgroundColor: AppTheme.lightBlueAccent,
-        iconTheme: new IconThemeData(color: AppTheme.whiteColor),
-        centerTitle: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
+    return SafeArea(
+      child: new Scaffold(
+        appBar: new AppBar(
+          title: new Text(
+            "Passenger Details...", style: TextStyle(color: AppTheme.whiteColor,),),
+          backgroundColor: AppTheme.lightBlueAccent,
+          iconTheme: new IconThemeData(color: AppTheme.whiteColor),
+          centerTitle: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
           ),
         ),
-      ),
-      backgroundColor: AppTheme.whiteColor,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            semanticContainer: true,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            elevation: 0,margin: EdgeInsets.all(10),
-            child: Column(
-              children: <Widget>[
-                //SizedBox(height: 20,),
+        backgroundColor: AppTheme.whiteColor,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              semanticContainer: true,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              elevation: 0,margin: EdgeInsets.all(10),
+              child: Column(
+                children: <Widget>[
+                  //SizedBox(height: 20,),
 //                Align(alignment: Alignment.topLeft,
 //                  child: Container(
 //                    child: Text("  Passenger Details",
 //                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),),
 //                  ),
 //                ),
-                //SizedBox(height: 20),
-                Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                            children: <Widget>[
-                              Expanded(
-                                  child: Divider(
-                                    color: Colors.black87,
-                                  )
-                              ),
-                              Text("Primary Passenger Details",style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),),
-                              Expanded(
-                                  child: Divider(
-                                    color: Colors.black87,
-                                  )
-                              ),
-                            ]
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'Name',
-                            icon: Icon(Icons.person, color: Colors.lightBlueAccent),
+                  //SizedBox(height: 20),
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                              children: <Widget>[
+                                Expanded(
+                                    child: Divider(
+                                      color: Colors.black87,
+                                    )
+                                ),
+                                Text("Primary Passenger Details",style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),),
+                                Expanded(
+                                    child: Divider(
+                                      color: Colors.black87,
+                                    )
+                                ),
+                              ]
                           ),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                              icon: Icon(Icons.person, color: Colors.lightBlueAccent),
+                            ),
 //                            validator: (String value) {
 //                              if (value.trim().isEmpty) {
 //                                return 'Name is required';
 //                              }
 //                            },
-                          controller: taskNameInputController,
-                        ),
-                        //SizedBox(height: 20),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'Phone',
-                            icon: Icon(Icons.call, color: Colors.lightBlueAccent),
+                            controller: taskNameInputController,
                           ),
+                          //SizedBox(height: 20),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Phone',
+                              icon: Icon(Icons.call, color: Colors.lightBlueAccent),
+                            ),
 //                            validator: (String value) {
 //                              if (value.trim().isEmpty) {
 //                                return 'Phone is required';
 //                              }
 //                            },
-                            controller: taskPhoneInputController
-                        ),
-                        //SizedBox(height: 20),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'Age',
-                            icon: Icon(Icons.add, color: Colors.lightBlueAccent),
+                              controller: taskPhoneInputController
                           ),
+                          //SizedBox(height: 20),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Age',
+                              icon: Icon(Icons.add, color: Colors.lightBlueAccent),
+                            ),
 //                            validator: (String value) {
 //                              if (value.trim().isEmpty) {
 //                                return 'Age is required';
 //                              }
 //                            },
-                          controller: taskAgeInputController,
-                        ),
-                        //SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Text('Gender',style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 15)),
-                            addRadioButton(0, 'Male'),
-                            addRadioButton(1, 'Female'),
-                          ],
-                        ),
-                        SizedBox(height: 20,),
-                        Row(
+                            controller: taskAgeInputController,
+                          ),
+                          //SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Expanded(
-                                  child: Divider(
-                                    color: Colors.black87,
-                                  )
+                              Text('Gender',style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 15)),
+                              addRadioButton(0, 'Male'),
+                              addRadioButton(1, 'Female'),
+                            ],
+                          ),
+                          SizedBox(height: 20,),
+                          Row(
+                              children: <Widget>[
+                                Expanded(
+                                    child: Divider(
+                                      color: Colors.black87,
+                                    )
+                                ),
+                                Text("Secondary Passenger Details",style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold,)),
+                                Expanded(
+                                    child: Divider(
+                                      color: Colors.black87,
+                                    )
+                                ),
+                              ]
+                          ),
+                          SizedBox(height: 20,),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 200, 0),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                labelText: 'Apply Coupon',
+                                icon: Icon(Icons.local_offer, color: Colors.lightBlueAccent),
                               ),
-                              Text("Secondary Passenger Details",style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold,)),
-                              Expanded(
-                                  child: Divider(
-                                    color: Colors.black87,
-                                  )
-                              ),
-                            ]
-                        ),
-                        SizedBox(height: 20,),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 200, 0),
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Apply Coupon',
-                              icon: Icon(Icons.local_offer, color: Colors.lightBlueAccent),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 20,),
-                        Row(
-                          children: <Widget>[
-                            Checkbox(
-                              value: _agreedToTOS,
-                              onChanged: _setAgreedToTOS,
-                              activeColor: Colors.lightBlueAccent,
-                            ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () => _setAgreedToTOS(!_agreedToTOS),
-                                child: Text(
-                                  'I agree to the Terms of Services and Privacy Policy',
+                          SizedBox(height: 20,),
+                          Row(
+                            children: <Widget>[
+                              Checkbox(
+                                value: _agreedToTOS,
+                                onChanged: _setAgreedToTOS,
+                                activeColor: Colors.lightBlueAccent,
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () => _setAgreedToTOS(!_agreedToTOS),
+                                  child: Text(
+                                    'I agree to the Terms of Services and Privacy Policy',
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      SizedBox(height: 20,),
-                      new Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                              new Container(
-                                height:50.0, width: 170.0,
-                                child: new RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                  ),
-                                        color: AppTheme.lightBlueAccent,
-                                        child: new Text('Pay', style: new TextStyle(color: Colors.white),),
-                                        onPressed: _submittable() ? _submit : Navigator.pushNamed(context, '/PaymentOptions'),
+                            ],
+                          ),
+                        SizedBox(height: 20,),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                                new Container(
+                                  height:50.0, width: 170.0,
+                                  child: new RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
+                                          color: AppTheme.lightBlueAccent,
+                                          child: new Text('Pay', style: new TextStyle(color: Colors.white),),
+                                          onPressed: _submittable() ? _submit : Navigator.pushNamed(context, '/PaymentOptions'),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

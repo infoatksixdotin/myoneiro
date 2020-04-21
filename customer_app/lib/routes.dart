@@ -7,7 +7,6 @@ import 'package:flutter_app1/TabBar/dashboard.dart';
 import 'package:flutter_app1/screens/aircraft_detail.dart';
 import 'package:flutter_app1/screens/avail_aircrafts.dart';
 import 'package:flutter_app1/screens/avail_seats.dart';
-import 'package:flutter_app1/screens/filter_aircraft.dart';
 import 'package:flutter_app1/screens/login_user.dart';
 
 import 'package:flutter_app1/screens/passenger_details.dart';
@@ -29,6 +28,6 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/PassengerDetails': (BuildContext context) => PassengerDetails(),
   '/TicketScreen': (BuildContext context) => TicketScreen(),
   '/aircraft_detail': (BuildContext context) => aircraft_detail(),
-  '/filter_aircraft': (BuildContext context) => filter_aircraft(),
+  
 
 };

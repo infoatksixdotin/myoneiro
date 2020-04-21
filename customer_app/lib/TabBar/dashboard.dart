@@ -85,97 +85,98 @@ _pickDate() async {
   }
   @override
   Widget build(BuildContext context) {
-
-    return new Scaffold(
-        resizeToAvoidBottomInset: false,
-        drawer:DrawerMenu.getMenu(context),
-      appBar: new AppBar(
-          title: new Text('Book Tickets'),
-          backgroundColor: AppTheme.lightBlueAccent,
-          centerTitle: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
+    return SafeArea(
+      child: new Scaffold(
+          resizeToAvoidBottomInset: false,
+          drawer:DrawerMenu.getMenu(context),
+        appBar: new AppBar(
+            title: new Text('Book Tickets'),
+            backgroundColor: AppTheme.lightBlueAccent,
+            centerTitle: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(30),
+              ),
             ),
           ),
-        ),
 
-        body: SingleChildScrollView(
-      child:Center(
-          child: Container(
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-               SizedBox(height: 20,),
-                 CircleAvatar(
-                  radius: 80.0,
-                  backgroundColor: Colors.black,
-                  backgroundImage: AssetImage('assets/logo/images.jpg'),
-                ),
-                Card(
-                    color: Colors.white,
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.location_on,
-                        color: AppTheme.lightBlueAccent,
-                      ),
-                      title:getLocationDropdown(),
-                    )),
-                    new GestureDetector(
-                      onTap: _pickDate,
-                      child: Card(
+          body: SingleChildScrollView(
+        child:Center(
+            child: Container(
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                 SizedBox(height: 20,),
+                   CircleAvatar(
+                    radius: 80.0,
+                    backgroundColor: Colors.black,
+                    backgroundImage: AssetImage('assets/logo/images.jpg'),
+                  ),
+                  Card(
                       color: Colors.white,
                       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                       child: ListTile(
-                          title: Text(getFormatedDate(),style: TextStyle(color: AppTheme.lightBlueAccent),),
-                          
-                          leading: Icon(
-                            Icons.calendar_today,
-                            color: AppTheme.lightBlueAccent,
-                          ),
+                        leading: Icon(
+                          Icons.location_on,
+                          color: AppTheme.lightBlueAccent,
+                        ),
+                        title:getLocationDropdown(),
                       )),
-                    ),
-                Card(
-                    color: Colors.white,
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.timer,
-                        color: AppTheme.lightBlueAccent,
+                      new GestureDetector(
+                        onTap: _pickDate,
+                        child: Card(
+                        color: Colors.white,
+                        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                        child: ListTile(
+                            title: Text(getFormatedDate(),style: TextStyle(color: AppTheme.lightBlueAccent),),
+                            
+                            leading: Icon(
+                              Icons.calendar_today,
+                              color: AppTheme.lightBlueAccent,
+                            ),
+                        )),
                       ),
-                      title: getTimeslotDropdown(),
-                    )),
-                  new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                     height:50.0, width: 170.0,
-                      margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 40.0),
-                      child: new RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
+                  Card(
+                      color: Colors.white,
+                      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.timer,
+                          color: AppTheme.lightBlueAccent,
                         ),
-                        child: new Text(
-                          'Search',
-                          style: new TextStyle(
-                          color: Colors.white
+                        title: getTimeslotDropdown(),
+                      )),
+                    new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                       height:50.0, width: 170.0,
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 40.0),
+                        child: new RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                           ),
+                          child: new Text(
+                            'Search',
+                            style: new TextStyle(
+                            color: Colors.white
+                            ),
+                          ),
+                          color: Colors.lightBlueAccent,
+                           onPressed: (){
+                          Navigator.pushNamed(context,'/AvailAircrafts');
+                          },
+                        
                         ),
-                        color: Colors.lightBlueAccent,
-                         onPressed: (){
-                        Navigator.pushNamed(context,'/AvailAircrafts');
-                        },
-                      
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        )
-        ));
+          )
+          )),
+    );
   }
 
   String getFormatedDate() {

@@ -31,92 +31,94 @@ class _FirebaseApiConsolePage extends State<FirebaseApiConsolePage> {
   @override
   Widget build(BuildContext context) {
      _deviceSize = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text("Rest API Console", style: TextStyle(color: AppTheme.lightBlueAccent,),),
-        iconTheme: new IconThemeData(color: AppTheme.lightBlueAccent),
-        centerTitle: true,
-        leading: new Container(),
-      ),
-      backgroundColor: AppTheme.ScaffoldBackgroundColor,
-      body: new SingleChildScrollView(
-                child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextFormField(
-                  initialValue: m_collectionName,
-                  cursorColor: AppTheme.lightBlueAccent,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(hintText: 'collection name', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
+    return SafeArea(
+      child: Scaffold(
+        appBar: new AppBar(
+          title: new Text("Rest API Console", style: TextStyle(color: AppTheme.lightBlueAccent,),),
+          iconTheme: new IconThemeData(color: AppTheme.lightBlueAccent),
+          centerTitle: true,
+          leading: new Container(),
+        ),
+        backgroundColor: AppTheme.ScaffoldBackgroundColor,
+        body: new SingleChildScrollView(
+                  child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    initialValue: m_collectionName,
+                    cursorColor: AppTheme.lightBlueAccent,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(hintText: 'collection name', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
+                    ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AppTheme.lightBlueAccent,width: 1.0),
+                      ),),
+                    onChanged: (value) {
+                      m_collectionName = value;
+                    },
+                    style: TextStyle(color: AppTheme.lightBlueAccent),
+                    
                   ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppTheme.lightBlueAccent,width: 1.0),
-                    ),),
-                  onChanged: (value) {
-                    m_collectionName = value;
-                  },
-                  style: TextStyle(color: AppTheme.lightBlueAccent),
-                  
-                ),
-                SizedBox(height: 10.0),
-                TextFormField(
-                  initialValue: m_rowValue,
-                  cursorColor: AppTheme.lightBlueAccent,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(hintText: 'row value', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    initialValue: m_rowValue,
+                    cursorColor: AppTheme.lightBlueAccent,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(hintText: 'row value', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
+                    ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AppTheme.lightBlueAccent,width: 1.0),
+                      ),),
+                    onChanged: (value) {
+                      m_rowValue = value;
+                    },
+                    style: TextStyle(color: AppTheme.lightBlueAccent),
+                    
                   ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppTheme.lightBlueAccent,width: 1.0),
-                    ),),
-                  onChanged: (value) {
-                    m_rowValue = value;
-                  },
-                  style: TextStyle(color: AppTheme.lightBlueAccent),
-                  
-                ),
 
-                SizedBox(height: 10.0),
-                CheckboxListTile(
-                value: m_rw,
-                onChanged: (value) {
-                    setState(() {
-                    m_rw = value;
-                  });
-                },
-                title: new Text('',style: TextStyle(color: AppTheme.lightBlueAccent),),
-                controlAffinity: ListTileControlAffinity.leading,
-                activeColor:AppTheme.lightBlueAccent,
-              ),
-                  RaisedButton(
-                   color: AppTheme.lightBlueAccent,
-                   child: Text(m_rw ? 'Read' : 'Write', style: TextStyle(color: Colors.black)),
-                   onPressed: () => callFirebaseApi(m_collectionName, m_rowValue),
-                   elevation: 7.0,
-                 ),
-                TextField(
-                  readOnly: true,
-                  controller: m_txtResponse,
-                  cursorColor: AppTheme.lightBlueAccent,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(hintText: '', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
-                  ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppTheme.lightBlueAccent,width: 1.0),
-                    ),),
+                  SizedBox(height: 10.0),
+                  CheckboxListTile(
+                  value: m_rw,
                   onChanged: (value) {
+                      setState(() {
+                      m_rw = value;
+                    });
                   },
-                  style: TextStyle(color: AppTheme.lightBlueAccent),
+                  title: new Text('',style: TextStyle(color: AppTheme.lightBlueAccent),),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  activeColor:AppTheme.lightBlueAccent,
                 ),
-              ],
-            )),
+                    RaisedButton(
+                     color: AppTheme.lightBlueAccent,
+                     child: Text(m_rw ? 'Read' : 'Write', style: TextStyle(color: Colors.black)),
+                     onPressed: () => callFirebaseApi(m_collectionName, m_rowValue),
+                     elevation: 7.0,
+                   ),
+                  TextField(
+                    readOnly: true,
+                    controller: m_txtResponse,
+                    cursorColor: AppTheme.lightBlueAccent,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(hintText: '', focusColor: AppTheme.lightBlueAccent, enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppTheme.lightBlueAccent, width: 1.0),
+                    ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AppTheme.lightBlueAccent,width: 1.0),
+                      ),),
+                    onChanged: (value) {
+                    },
+                    style: TextStyle(color: AppTheme.lightBlueAccent),
+                  ),
+                ],
+              )),
+        ),
       ),
     ); // Scaffold
   }
