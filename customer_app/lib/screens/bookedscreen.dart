@@ -54,8 +54,8 @@ class _bookedscreenState extends State<bookedscreen> {
                                        backgroundImage: AssetImage(mydata[index]['imageurl']),),
                                    ),
                                  ),
-                                    Text( mydata[index]['group'],
-                                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+//                                    Text( mydata[index]['group'],
+//                                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                                 ]
                                 ),
                                 // no matter how big it is, it won't overflow
@@ -63,7 +63,7 @@ class _bookedscreenState extends State<bookedscreen> {
                                     children: <Widget>[
                                     Text( mydata[index]['title'],
                                   style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
-                                      SizedBox(width: 10,),
+                                      SizedBox(width: 3,),
                                       Text( 'Rs:'+ mydata[index]['price'],
                                           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                                     ],
@@ -74,7 +74,7 @@ class _bookedscreenState extends State<bookedscreen> {
                                       Row(
                                         children: <Widget>[
                                           Text( 'Friday, 18-Apr-2020', style: TextStyle(color: Colors.lightBlue,fontWeight: FontWeight.bold)),
-                                          SizedBox(width: 10,),
+                                          SizedBox(width: 6,),
                                           Text( 'Slot: 7:30AM', style: TextStyle(color: Colors.lightBlue,fontWeight: FontWeight.bold)),
                                         ],
                                       )
@@ -83,15 +83,15 @@ class _bookedscreenState extends State<bookedscreen> {
                               ),
                             ),
                             ButtonBar(
-                              alignment: MainAxisAlignment.spaceAround,
+                              alignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                FlatButton(
-                                 child: new Text('Ticket Number',
-                                     style: TextStyle(color: Colors.lightBlueAccent)),
-                                 onPressed: () {
-                                   //Navigator.pushNamed(context,'/');
-                                 },
-                                  ),
+//                                FlatButton(
+//                                 child: new Text('Ticket Number',
+//                                     style: TextStyle(color: Colors.lightBlueAccent)),
+//                                 onPressed: () {
+//                                   //Navigator.pushNamed(context,'/');
+//                                 },
+//                                  ),
                                 RaisedButton(
                                   shape: RoundedRectangleBorder (
                                     borderRadius: BorderRadius.circular (
@@ -126,13 +126,10 @@ class _bookedscreenState extends State<bookedscreen> {
                                                 actions: <Widget>[
                                                   ButtonBar (
                                                     alignment: MainAxisAlignment.start,
-                                                    buttonHeight: 30, buttonMinWidth: 100,
+                                                    buttonHeight: 2, buttonMinWidth: 35,
                                                     buttonPadding: EdgeInsets.all(18),
                                                     children: <Widget>[
                                                       RaisedButton (
-                                                        shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(50.0),
-                                                        ),
                                                         child: new Text('No',
                                                             style: TextStyle (
                                                                 color: Colors.white,
@@ -143,9 +140,6 @@ class _bookedscreenState extends State<bookedscreen> {
                                                         color: Colors.lightBlueAccent,
                                                       ),
                                                       RaisedButton (
-                                                        shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(50.0),
-                                                        ),
                                                         child: Text ( 'Yes',
                                                             style: TextStyle (
                                                                 color: Colors.white ) ),

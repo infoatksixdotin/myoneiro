@@ -89,10 +89,10 @@ initState() {
           child: Column (
             children: <Widget>[
               imageURI == null
-                  ? CircleAvatar(radius: 60.0,
+                  ? CircleAvatar(radius: 50.0,
                 backgroundColor: Colors.black,)
                   : CircleAvatar(
-                  radius: 60.0,
+                  radius: 50.0,
                   backgroundColor: Colors.black,
                   child: Image.file( imageURI, width: 300, height: 200, fit: BoxFit.cover)),
               GestureDetector(
@@ -114,7 +114,7 @@ initState() {
                             actions: <Widget>[
                               ButtonBar(
                                 alignment: MainAxisAlignment.start,
-                                buttonHeight: 30, buttonMinWidth: 100,
+                                buttonHeight: 5, buttonMinWidth: 35,
                                 buttonPadding: EdgeInsets.all(18),
                                 children:<Widget>[
                                   new RaisedButton(
@@ -125,7 +125,7 @@ initState() {
                                       getImageFromCamera();
                                       Navigator.pop(context);
                                     },
-                                    color: Colors.lightBlueAccent,
+                                    color: Colors.blue,
                                   ),
                                   new RaisedButton(
                                     shape: RoundedRectangleBorder(borderRadius:
@@ -135,7 +135,7 @@ initState() {
                                       getImageFromGallery();
                                       Navigator.pop(context);
                                     },
-                                    color: Colors.lightBlueAccent,
+                                    color: Colors.pink,
                                   ),
                                 ],
                               )

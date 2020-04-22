@@ -47,7 +47,7 @@ class _LoginAuthState extends State<LoginAuth> {
             ),
             leading: new Container(),
           ),
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Container(

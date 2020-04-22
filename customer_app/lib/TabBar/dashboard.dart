@@ -41,7 +41,7 @@ _pickDate() async {
       elevation: 16,
       style: TextStyle(color: AppTheme.lightBlueAccent),
       underline: Container(
-        height: 1,
+        height: 0,
         color:AppTheme.lightBlueAccent,
       ),
       onChanged: (String newValue) {
@@ -66,7 +66,7 @@ _pickDate() async {
       elevation: 16,
       style: TextStyle(color: AppTheme.lightBlueAccent),
       underline: Container(
-        height: 1,
+        height: 0,
         color:AppTheme.lightBlueAccent,
       ),
       onChanged: (String newValue) {
@@ -106,9 +106,9 @@ _pickDate() async {
               child: new Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                 SizedBox(height: 20,),
+                  SizedBox(height: 10,),
                    CircleAvatar(
-                    radius: 80.0,
+                    radius: 50.0,
                     backgroundColor: Colors.black,
                     backgroundImage: AssetImage('assets/logo/images.jpg'),
                   ),
