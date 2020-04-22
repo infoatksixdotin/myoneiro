@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/model/ticketmodel.dart';
 import 'package:flutter_app1/screens/passenger_details.dart';
 import 'package:flutter_app1/theme/appTheme.dart';
 
@@ -9,29 +10,17 @@ class availSeats extends StatefulWidget {
     return new availSeatsState();
   }
 }
-class RadioModel {
-  bool isSelected;
-  final String text;
-  bool booked;
 
-  RadioModel(this.isSelected,this.text,this.booked);
-}
 class availSeatsState extends State<availSeats> {
-
-  List<RadioModel> timeData = new List<RadioModel>();
+  TicketList ticketList;
+  List<Ticket> tickets;
+  String bookBtnCaption = "Book";
 
   @override
   void initState() {
     super.initState();
-    timeData.add(new RadioModel(false,  '6:00AM',true));
-    timeData.add(new RadioModel(false,  '6:15AM',false));
-    timeData.add(new RadioModel(false,  '6:30AM',true));
-    timeData.add(new RadioModel(false,  '6:45AM',false));
-    timeData.add(new RadioModel(false,  '7:00AM',false));
-    timeData.add(new RadioModel(false,  '7:15AM',false));
-    timeData.add(new RadioModel(false,  '7:30AM',false));
-    timeData.add(new RadioModel(false,  '7:45AM',false));
-    timeData.add(new RadioModel(false,  '8:00AM',false));
+    ticketList = TicketList.getTicketList();
+    tickets = ticketList.getTickets();
   }
 
   @override
@@ -94,14 +83,11 @@ class availSeatsState extends State<availSeats> {
                 return InkWell(
                   splashColor: Colors.lightBlueAccent,
                   onTap: () {
-                      setState(() {
-                       //timeData.forEach((element) => element.isSelected = false);
-                         timeData[index].isSelected = true;
-                      });
+                      handleTicketSelection(index);
                   },
-                   child: new RadioItem(timeData[index],true),
+                   child: new TicketItem(tickets[index]),
                    );
-              }, childCount: timeData.length + 0
+              }, childCount: tickets.length + 0
               ),
             ),
                SliverFillRemaining(
@@ -117,7 +103,7 @@ class availSeatsState extends State<availSeats> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
                             ),
-                            child: Text('Book',style: new TextStyle(color: Colors.white),),
+                            child: Text(bookBtnCaption,style: new TextStyle(color: Colors.white),),
                             onPressed: () {
                               // need to add validation
                               Navigator.push(context, MaterialPageRoute(
@@ -133,8 +119,29 @@ class availSeatsState extends State<availSeats> {
       ),
     );
   }
-}
 
+  void handleTicketSelection(int index) {
+    setState(() {
+        Ticket ticket = tickets[index];
+        switch(ticket.status) {
+        case TicketStatus.available:
+            ticket.status = TicketStatus.selected;
+            bookBtnCaption = ticketList.getTicketsAndCosts();
+          break;
+         case TicketStatus.selected:
+            ticket.status = TicketStatus.available;
+            bookBtnCaption = ticketList.getTicketsAndCosts();
+          break;
+        case TicketStatus.blocked:
+        case TicketStatus.booked:
+        case TicketStatus.canceled:
+          break;
+        }
+       // timeData[index].isSelected = true;
+    });
+  }
+}
+/*
 class RadioItem extends StatelessWidget {
   final RadioModel _item;
   final bool booked;
@@ -169,6 +176,61 @@ class RadioItem extends StatelessWidget {
     );
   }
 }
+*/
 
-
-
+class TicketItem extends StatelessWidget {
+  final Ticket _item;
+  TicketItem(this._item);
+  @override
+  Widget build(BuildContext context) {
+        Color ticketColor = Colors.white;
+        IconData ticketIcon;// = Icons.favorite;
+        String bookedText = "";
+        switch(_item.status) {
+        case TicketStatus.available:
+          ticketColor = Colors.green;
+          break;
+        case TicketStatus.selected:
+          ticketColor = Colors.yellow;
+          ticketIcon = Icons.done;
+          break;
+        case TicketStatus.blocked:
+          ticketColor = Colors.blueGrey;
+          ticketIcon = Icons.done;
+          break;
+        case TicketStatus.booked:
+          bookedText = "Booked";
+          ticketColor = Colors.blue;
+          ticketIcon = Icons.done;
+          break;
+        case TicketStatus.canceled:
+          break;
+        }
+        print("Ticket Status: " + _item.status.toString()); 
+    return new Column(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        SizedBox(height: 30,),
+        Expanded(
+          flex: 1,
+          child: new Container(
+            height: 55.0,
+            width: 55.0,
+            decoration: new BoxDecoration(
+              color: ticketColor,
+              border: new Border.all(width: 2.0, color: Colors.black),
+              borderRadius: const BorderRadius.all(const Radius.circular(5.0)),
+            ),
+            child: Column(
+              children:<Widget>[
+                Icon(ticketIcon,color: Colors.white,size: 35,),
+                Expanded(child: new Text(bookedText, style: TextStyle(color: Colors.pink))),
+              ],
+            ),
+          ),
+        ),
+        new Text(_item.time, style: TextStyle(color: AppTheme.BlackColor)),
+      ],
+    );
+  }
+}
